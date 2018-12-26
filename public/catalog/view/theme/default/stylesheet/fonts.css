@@ -1,0 +1,17 @@
+/* include font css start */
+@font-face {
+    font-family: 'Raleway-Bold';
+    src: url('https://www.leisurecosmetics.com/catalog/view/theme/default/fonts/raleway/Raleway-ExtraBold.ttf');
+}
+@font-face {
+    font-family: 'Raleway-Medium';
+    src: url('https://www.leisurecosmetics.com/catalog/view/theme/default/fonts/raleway/Raleway-SemiBold.ttf');
+}
+@font-face {
+    font-family: 'Raleway-Regular';
+    src: url('https://www.leisurecosmetics.com/catalog/view/theme/default/fonts/raleway/Raleway-Regular.ttf');
+}
+@font-face {
+    font-family: 'roboto';
+    src: url('https://www.leisurecosmetics.com/catalog/view/theme/default/fonts/roboto/Roboto-Regular.ttf');
+}
