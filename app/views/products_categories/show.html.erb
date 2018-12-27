@@ -1,0 +1,62 @@
+<div id="page-main-content">
+
+    <!-- PAGE CONTENT START -->
+    <div class="section">
+        <!-- heading and description -->
+        <div class="line">
+            <div class="margin">
+                <div class="fullwidth">
+                    <h1 class="text-center">化妝刷具</h1>
+
+
+                    <hr class="break-small break-center">
+                    <!-- <div class="customform right">
+                                <select id="input-sort" onchange="location = this.value;">
+                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.sort_order&amp;order=ASC"
+                                     selected="selected">預設</option>
+                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=pd.name&amp;order=ASC">名稱（A
+                                        - Z）</option>
+                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=pd.name&amp;order=DESC">名稱（Z
+                                        - A）</option>
+                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.price&amp;order=ASC">價格（低
+                                        &gt; 高）</option>
+                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.price&amp;order=DESC">價格（高
+                                        &gt; 低）</option>
+                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.model&amp;order=ASC">型號（A
+                                        - Z）</option>
+                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.model&amp;order=DESC">型號（Z
+                                        - A）</option>
+                                </select>
+                            </div> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- products -->
+        <div class="line">
+            <div class="margin productlist">
+
+
+                <!-- product 1 -->
+                <% 8.times do %>
+                <%= render 'products' %>
+                <% end %>
+                <!-- <div class="margin">
+                            <div class="fullwidth text-center">
+                                <ul class="pagination pagination_dark">
+                                    <li><a href="index.php?route=product%252Fcategory&amp;path=78&amp;">|&lt;</a></li>
+                                    <li><a href="index.php?route=product%252Fcategory&amp;path=78&amp;">&lt;</a></li>
+                                    <li><a href="index.php?route=product%252Fcategory&amp;path=78&amp;">1</a></li>
+                                    <li class="active"><span>2</span></li>
+                                </ul>
+                            </div>
+                        </div> -->
+                <div class="text-center">Paginator</div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    <%= render 'layouts/footer'%>
