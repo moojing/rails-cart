@@ -15,19 +15,23 @@
     <link rel="icon" type="img/ico" href="catalog/view/images/favor.png">
   
     <!-- css Files -->
-    <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/jquery-ui.min.css">
+    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/jquery-ui.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" type="text/css" />
-    <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/stylesheet.css">
-    <link rel="stylesheet" href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" media="screen" />
-    <link rel="stylesheet" href="catalog/view/javascript/jquery/magnific/magnific-popup.css" media="screen" />
-    <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/myresponsee.css">
-    <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/style.css">
-    <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/responsive.css">
-    <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/custom.css">
+    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/catalog/view/javascript/bootstrap/css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="/catalog/view/javascript/jquery/magnific/magnific-popup.css" media="screen" />
+    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/myresponsee.css">
+    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/style.css">
+    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/responsive.css">
+    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/custom.css">
   
   </head>
-
-  <body>
+  <script>
+		var initializeFunctions = []; 
+	</script>
+  <body  class="size-1140">
+    <%=render "layouts/header" %>
     <%= yield %>
   </body>
 </html>
