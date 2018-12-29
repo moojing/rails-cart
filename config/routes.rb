@@ -2,21 +2,19 @@ Rails.application.routes.draw do
   
   root :to => 'pages#home'
 
-  namespace :products do
-    get '/categories/:id', :to => 'products_categories#show'
-    get '/:id', :to => 'products#show'
-  end
+  
+    get '/products/categories/:id', :to => 'products_categories#show'
+    get '/products/:id', :to => 'products#show'
+  
 
-  namespace :news do
-    get '/categories/:id', :to => 'news_categories#show'
-    get '/:id', :to => 'news#show'
-  end
+    get '/news/categories/:id', :to => 'news_categories#show'
+    get '/news/:id', :to => 'news#show'
+  
 
-  namespace :account do
-    get '/edit' , :to=>'account#edit'
-    get '/password' , :to=>'account#password'
-    get '/address' , :to=>'account#address'
-  end
+    get '/account/edit' , :to=>'account#edit'
+    get '/account/password' , :to=>'account#password'
+    get '/account/address' , :to=>'account#address'
+  
   
   get 'cart' , :to=> 'cart#show'
 
