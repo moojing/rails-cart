@@ -1,18 +1,34 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   root :to => 'pages#home'
-  get 'products/categories/:id', :to => 'products_categories#show'
-  get 'products/:id', :to => 'products#show'
 
-  get 'news/categories/:id', :to => 'news_categories#show'
-  get 'news/:id', :to => 'news#show'
+  namespace :products do
+    get '/categories/:id', :to => 'products_categories#show'
+    get '/:id', :to => 'products#show'
+  end
+
+  namespace :news do
+    get '/categories/:id', :to => 'news_categories#show'
+    get '/:id', :to => 'news#show'
+  end
+
+  namespace :account do
+    get '/edit' , :to=>'account#edit'
+    get '/password' , :to=>'account#password'
+    get '/address' , :to=>'account#address'
+  end
   
   get 'cart' , :to=> 'cart#show'
-
-  get '/users/edit' , :to=>'users#edit'
-  get '/users/password' , :to=>'users#password'
-  get '/users/address' , :to=>'users#address'
   
+  scope :my do 
+    devise_for :users, controllers: {
+      sessions: 'users/sessions'
+    }
+  end 
+
+ 
+  devise_for :admins, controllers: {
+    sessions: 'admins/sessions'
+  }
   
 end
