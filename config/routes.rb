@@ -16,17 +16,17 @@ Rails.application.routes.draw do
     get '/account/address' , :to=>'account#address'
   
   
-  get 'cart' , :to=> 'cart#show'
+    get 'cart' , :to=> 'cart#show'
 
-  
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
- 
-
- 
-  devise_for :admins, controllers: {
-    sessions: 'admins/sessions'
-  }
+    
+    devise_for :users, controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations' 
+    }
+    
+    
+    devise_for :admins, controllers: {
+      sessions: 'admins/sessions'
+    }
   
 end
