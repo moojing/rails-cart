@@ -2,7 +2,7 @@
 
 class Admins::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  before_action :check_if_user , only: [:new]
   # GET /resource/sign_in
   # def new
   #   super
@@ -24,4 +24,10 @@ class Admins::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  def check_if_user
+    if current_user
+      puts 'yeah~redirect'
+      redirect_to :root and return
+    end
+  end
 end

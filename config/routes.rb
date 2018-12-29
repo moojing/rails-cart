@@ -19,12 +19,12 @@ Rails.application.routes.draw do
   end
   
   get 'cart' , :to=> 'cart#show'
+
   
-  scope :my do 
-    devise_for :users, controllers: {
-      sessions: 'users/sessions'
-    }
-  end 
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+ 
 
  
   devise_for :admins, controllers: {
