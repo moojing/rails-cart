@@ -16,8 +16,14 @@ Rails.application.routes.draw do
     get '/account/address' , :to=>'account#address'
   
   
-    get 'cart' , :to=> 'cart#show'
-
+    get '/cart' , :to=> 'cart#show'
+    
+    get '/admins' , :to => 'admins/dashboards#show' ,:as=>'admin_root'
+    
+    authenticated :admin do
+      root :to => "dashboard#show"
+    end 
+    
     
     devise_for :users, controllers: {
       sessions: 'users/sessions',

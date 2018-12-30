@@ -32,4 +32,9 @@ class Admins::SessionsController < Devise::SessionsController
       redirect_to :root and return
     end
   end
+
+  def after_sign_in_path_for(resource)
+    # stored_location_for(resource) || root_path
+    signed_in_root_path(resource)
+  end
 end
