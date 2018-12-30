@@ -37,4 +37,9 @@ class Admins::SessionsController < Devise::SessionsController
     # stored_location_for(resource) || root_path
     signed_in_root_path(resource)
   end
+  
+  def after_sign_in_path_for(resource)
+    root_path
+  end
+  
 end
