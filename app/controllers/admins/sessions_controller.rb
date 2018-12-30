@@ -5,10 +5,10 @@ class Admins::SessionsController < Devise::SessionsController
   before_action :check_if_user , only: [:new]
   
   # GET /resource/sign_in
-  def new
-    super
+  # def new
+  #   super
     
-  end
+  # end
 
   # POST /resource/sign_in
   # def create
@@ -20,7 +20,7 @@ class Admins::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
@@ -28,18 +28,16 @@ class Admins::SessionsController < Devise::SessionsController
   # end
   def check_if_user
     if current_user
-      puts 'yeah~redirect'
       redirect_to :root and return
     end
   end
 
   def after_sign_in_path_for(resource)
-    # stored_location_for(resource) || root_path
-    signed_in_root_path(resource)
+    signed_in_root_path(resource) || root_path
   end
-  
-  def after_sign_in_path_for(resource)
-    root_path
+
+  def after_sign_out_path_for(resource)
+    '/admins/sign_in' || root_path
   end
   
 end

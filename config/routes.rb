@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   
+  namespace :admins do
+    get 'users/index'
+    get 'users/new'
+    get 'users/create'
+    get 'users/edit'
+    get 'users/destroy'
+  end
   root :to => 'pages#home'
 
   
@@ -18,19 +25,17 @@ Rails.application.routes.draw do
   
     get '/cart' , :to=> 'cart#show'
     
-    get '/admins' , :to => 'admins/dashboards#show' ,:as=>'admin_root'
-    
-    authenticated :admin do
-      root :to => "dashboard#show"
-    end 
-    
-    
     devise_for :users, controllers: {
       sessions: 'users/sessions',
       registrations: 'users/registrations' 
     }
+
+    get '/admins' , :to => 'admins/dashboard#index' ,:as=>'admin_root'
     
-    
+    namespace :admins do
+      resources :users
+    end
+
     devise_for :admins, controllers: {
       sessions: 'admins/sessions', 
       registrations: 'admins/registrations'

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
     def layout_by_resource
       if devise_controller? && resource_name == :admin
-        is_a?(Devise::SessionsController)||is_a?(Devise::RegistrationsController)  ? "admin/guest" : "admin/dashboard"
+        is_a?(Devise::SessionsController)||is_a?(Devise::RegistrationsController)  ? "admin/guest" : "dashboard"
       else
         "application"
       end

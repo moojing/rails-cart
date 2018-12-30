@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Admin panel </title>
+    <base href="" />
+    <meta name="description" content="Leisure Admin " />
+
+    <link rel="icon" type="img/ico" href="catalog/view/images/favor.png">
+    <!-- Bootstrap -->
+    <link href="/dashboard/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/dashboard/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/dashboard/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- jQuery custom content scroller -->
+    <link href="/dashboard/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+    <%= javascript_include_tag :application %>
+    <!-- Custom Theme Style -->
+    <link href="/dashboard/build/css/custom.min.css" rel="stylesheet">
+  </head>
+  
+  <body class="nav-md">
+ 
+
+    <div class="container body">
+        <div class="main_container">
+          <div class="col-md-3 left_col menu_fixed">
+            <div class="left_col scroll-view">
+              <div class="navbar nav_title" style="border: 0;">
+                <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              </div>
+  
+              <div class="clearfix"></div>
+  
+              
+              <br />
+              <%= render 'layouts/admin/sidebar' %>
+  
+              <!-- /menu footer buttons -->
+              <div class="sidebar-footer hidden-small">
+                <a data-toggle="tooltip" data-placement="top" title="Settings">
+                  <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                  <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Lock">
+                  <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                </a>
+                <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                  <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                </a>
+              </div>
+              <!-- /menu footer buttons -->
+            </div>
+          </div>
+  
+          <!-- top navigation -->
+          <div class="top_nav">
+            <div class="nav_menu">
+              <nav>
+                <div class="nav toggle">
+                  <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                </div>
+  
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <img src="images/img.jpg" alt="">
+                      <%- if current_admin%>
+                        <%= current_admin.email.split('@')[0]%>
+                      <%-end %>
+                      <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                      <%- if current_admin%>
+                        <li><a href="/admins/edit"> Profile</a></li>
+                      <%-end %>
+                     <li> <%= link_to "Log Out", destroy_admin_session_path, method: :delete %></li>
+                    
+                    </ul>
+                  </li>
+   
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- /top navigation -->
+  
+          <!-- page content -->
+          <div class="right_col" role="main">
+            <div class="">
+              <div class="page-title">
+               
+                  <%= yield %>
+                 
+              </div>
+            </div>
+          </div>
+          <!-- /page content -->
+  
+          <!-- footer content -->
+          <footer>
+            <div class="pull-right">
+              Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            </div>
+            <div class="clearfix"></div>
+          </footer>
+          <!-- /footer content -->
+        </div>
+      </div>
+
+
+  
+    <!-- jQuery -->
+    <script src="/dashboard/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/dashboard/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/dashboard/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/dashboard/vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery custom content scroller -->
+    <script src="/dashboard/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="/dashboard/build/js/custom.min.js"></script>  
+
+  </body>
+</html>
