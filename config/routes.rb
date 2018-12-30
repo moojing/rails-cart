@@ -22,8 +22,9 @@ Rails.application.routes.draw do
     get '/account/password' , :to=>'account#password'
     get '/account/address' , :to=>'account#address'
   
-  
     get '/cart' , :to=> 'cart#show'
+    
+    post '/contacts' , :to=> 'contacts#create'
     
     devise_for :users, controllers: {
       sessions: 'users/sessions',

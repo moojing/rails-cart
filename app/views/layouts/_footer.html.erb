@@ -5,97 +5,60 @@
         <!-- email and phone numbers -->
 
         <div class="line">
-
             <div class="margin">
-
                 <div class="fullwidth text-center margin-bottom-40">
-
                     <h5>聯絡我們</h5>
-
                 </div>
-
+                <% if flash[:success] %>
+                <div class="notice" style="color: white;
+                text-align: center;
+                font-size: 20px;
+                margin: 30px 0; "><%= flash[:success] %></div>
+                <% end %>
                 <div class="fullwidth phone-number margin-bottom-60">
-
                     <div class="s-12 m-6 l-6 margin-s-bottom-60">
-
                         <span>客服信箱</span><br />
-
-                        service@leisurecosmetics.com
-
+                        service@birdsbye.com
                     </div>
-
                     <div class="s-12 m-6 l-6">
-
                         <span>合作洽談</span><br />
-
-                        lijue.company@gmail.com
-
+                        birdsbye@gmail.com
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <!-- contact form -->
 
         <div class="line">
-
-            <form class="footer-form" action="https://www.leisurecosmetics.com/index.php?route=information/contact"
-                method="post" onsubmit="return validate(this);">
-
+            <%= form_tag( contacts_path,method: "post", class: "footer-form") do |f| -%>
+           
+                <!-- onsubmit="return validate(this); -->
                 <div class="fullwidth">
-
                     <div class="margin">
-
                         <div class="s-12 m-6 l-6">
-
-                            <input type="text" name="name" placeholder="姓名" title="姓名" required />
-
+                            <input type="text" name="contact[name]" placeholder="姓名" title="姓名" required />
                         </div>
-
                         <div class="s-12 m-6 l-6">
-
-                            <input type="text" name="email" placeholder="Email" title="Email" required />
-
+                            <input type="text" name="contact[mail]" placeholder="Email" title="Email" required />
                         </div>
-
                     </div>
-
                     <div class="margin">
-
                         <div class="s-12 m-6 l-6">
-
-                            <input type="text" name="phone" placeholder="聯絡電話" title="聯絡電話" required />
-
+                            <input type="text" name="contact[phone]" placeholder="聯絡電話" title="聯絡電話" required />
                         </div>
-
-                        <!-- <div class="s-12 m-6 l-6">
-		
-									<input type="text" name="subject" placeholder="主題" title="主題" />
-		
-								</div> -->
-
                     </div>
 
                     <div class="s-12">
-
-                        <textarea name="enquiry" placeholder="留言" rows="2" required></textarea>
-
+                        <textarea name="contact[note]" placeholder="留言" rows="2" required></textarea>
                     </div>
                     <div class="s-12 text-center errorwrap">
                     </div>
                     <div class="s-12 m-12 l-4 l-offset-4">
-
                         <input type="submit" class="button" value="送出">
-
                     </div>
-
                 </div>
-
-            </form>
-
+            <%end -%>
         </div>
 
     </div>
