@@ -27,3 +27,77 @@
 <% end %>
 
 <%= render "users/shared/links" %>
+
+
+ 
+
+<div id="page-main-content">
+        
+    <div class="section">
+        
+        <div class="line">
+            <div class="margin">
+                <div class="s-12 m-offset-2 m-8 l-offset-3 l-6">
+
+                    <div class="fullwidth">
+                        <h1>加入會員</h1>
+                        <hr class="break-small">
+
+                    </div>
+
+                    <div class="fullwidth margin-bottom-20"><a href="/users/sign_in" class="text-primary margin-bottom-20">已經是會員？</a>或選擇下列方式快速登入
+                    </div>
+                   
+                    <p>您也可以選擇輸入下方資料加入會員</p>
+                    <div class="fullwidth">
+                       
+                            
+                            <%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {class: "customform"}) do |f| %>
+                            <div class="margin">
+                                <div class="s-12 m-6 l-6">
+                                    <input type="text" name="user[lastname]" value="" placeholder="姓氏" />
+                                </div>
+                                <div class="s-12 m-6 l-6">
+                                    <input type="text" name="user[firstname]" value="" placeholder="名字"  />
+                                </div>
+                            </div>
+                            <div class="fullwidth">
+                                <input type="tel" name="user[telephone]" value="" placeholder="聯絡電話" />
+                            </div>
+                            <div class="fullwidth">
+                                <input type="email" name="user[email]" value="" placeholder="Email 信箱（帳號）"   />
+                            </div>
+                                  
+                            <div class="fullwidth">
+                                <input type="text" name="user[address]" value="" placeholder="地址" />
+                            </div>
+
+
+                            <div class="margin">
+                                <div class="s-12 m-6 l-6">
+                                    <input type="password" name="user[password]" value="" placeholder="密碼" />
+                                </div>
+                                <div class="s-12 m-6 l-6">
+                                    <input type="password" name="user[password_confirmation]" value="" placeholder="確認密碼" />
+                                </div>
+                            </div>
+ 
+                            <div class="fullwidth">
+
+                                <div class="buttons">
+                                    <div class="pull-right">
+                                        <%= f.submit "Sign up" %>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <%end%>
+
+                        
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+ 

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get '/news/:id', :to => 'news#show'
   
 
+    get '/account/login' , :to=>'account#login'
     get '/account/edit' , :to=>'account#edit'
     get '/account/password' , :to=>'account#password'
     get '/account/address' , :to=>'account#address'

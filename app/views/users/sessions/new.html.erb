@@ -1,26 +1,48 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div id="page-main-content">
+	 
+		<div class="section">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+			<div class="line">
+				<div class="fullwidth margin-bottom-20">
+					<h1 class="text-center">會員登入</h1>
+					<hr class="break-small break-center">
+				</div>
+			</div>
+		
+			<div class="line">
+				<div class="margin">
+					<div class="s-12 m-offset-3 m-6 l-offset-4 l-4">
+						<div class="fullwidth">
+							
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name),  html: {class: "customform"}) do |f| %>
+                <div class="margin-bottom-30">
+ 
+                      <%= f.email_field :email, autofocus: true, 
+                        autocomplete: "email" ,placeholder:"Email"%>
+                        
+                      <%= f.password_field :password,
+                        autocomplete: "current-password" ,placeholder:"密碼"%>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
+     						</div>
+								
+								<input type="submit" value="登入" class="margin-bottom-30" />
+								<div class="right text-right">
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+							 
+								</div>
+								<input type="hidden" name="redirect" value="https://www.leisurecosmetics.com/index.php?route=account/edit" />
+                <% end %>
 
-<%= render "users/shared/links" %>
+                <%= render "users/shared/links" %>
+                
+
+					
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
