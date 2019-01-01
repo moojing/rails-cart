@@ -1,34 +1,4 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
-
-
+ 
  
 
 <div id="page-main-content">
@@ -45,13 +15,21 @@
 
                     </div>
 
-                    <div class="fullwidth margin-bottom-20"><a href="/users/sign_in" class="text-primary margin-bottom-20">已經是會員？</a>或選擇下列方式快速登入
+                    <div class="fullwidth margin-bottom-20"><a href="/users/sign_in" class="text-primary margin-bottom-20">已經是會員？</a> 
                     </div>
                    
-                    <p>您也可以選擇輸入下方資料加入會員</p>
                     <div class="fullwidth">
                        
+                             
+                                    
+                            <ul id="error_explanation">
+                                <% @user.errors.full_messages.each do |msg| %>
+                                <li class="error_field"> <%= msg %></li>    
+                                <% end %>
+                            </ul>
                             
+                            
+                           
                             <%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {class: "customform"}) do |f| %>
                             <div class="margin">
                                 <div class="s-12 m-6 l-6">
@@ -100,4 +78,19 @@
             </div>
         </div>
     </div>
- 
+    <style> 
+        #error_explanation{
+            padding: 0;
+            margin-bottom: 10px 0;
+        }
+        .error_field{
+            padding:5px 10px; 
+            list-style: none;
+            border:1px solid #de5151;
+            color:#de5151;
+            margin: 10px 0;
+            
+        }
+    </style>
+
+     
