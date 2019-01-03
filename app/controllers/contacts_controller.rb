@@ -3,10 +3,9 @@ class ContactsController < ApplicationController
     def create 
         @contact = Contact.new(contact_params)
         if @contact.save 
-            flash[:success] = "The message has sent, thank you!!"
+            render json: {status: 200,message: 'Your message has been successfully sent.'}
         end
-        redirect_to root_path :anchor => 'footercontact'
-        # render json: {status: 200}
+        
     end 
 
 
