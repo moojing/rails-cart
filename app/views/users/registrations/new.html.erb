@@ -22,9 +22,9 @@
                        
                              
                                     
-                            <ul id="error_explanation">
+                            <ul id="user_error_explanation">
                                 <% @user.errors.full_messages.each do |msg| %>
-                                <li class="error_field"> <%= msg %></li>    
+                                <li class="user_error_field"> <%= msg %></li>    
                                 <% end %>
                             </ul>
                             
@@ -33,10 +33,10 @@
                             <%= form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {class: "customform"}) do |f| %>
                             <div class="margin">
                                 <div class="s-12 m-6 l-6">
-                                    <input type="text" name="user[lastname]" value="" placeholder="姓氏" />
+                                    <input type="text" name="user[last_name]" value="" placeholder="姓氏" />
                                 </div>
                                 <div class="s-12 m-6 l-6">
-                                    <input type="text" name="user[firstname]" value="" placeholder="名字"  />
+                                    <input type="text" name="user[first_name]" value="" placeholder="名字"  />
                                 </div>
                             </div>
                             <div class="fullwidth">
@@ -78,19 +78,5 @@
             </div>
         </div>
     </div>
-    <style> 
-        #error_explanation{
-            padding: 0;
-            margin-bottom: 10px 0;
-        }
-        .error_field{
-            padding:5px 10px; 
-            list-style: none;
-            border:1px solid #de5151;
-            color:#de5151;
-            margin: 10px 0;
-            
-        }
-    </style>
-
+ 
      

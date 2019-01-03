@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'users/create'
     get 'users/edit'
     get 'users/destroy'
+    resources 'products'
   end
   root :to => 'pages#home'
 
@@ -29,8 +30,11 @@ Rails.application.routes.draw do
     
     devise_for :users, controllers: {
       sessions: 'users/sessions',
-      registrations: 'users/registrations' 
+      registrations: 'users/registrations',
+      
     }
+    
+    
 
     get '/admins' , :to => 'admins/dashboard#index' ,:as=>'admin_root'
     

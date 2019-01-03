@@ -10,10 +10,10 @@
                     <h5>聯絡我們</h5>
                 </div>
                 <% if flash[:success] %>
-                <div class="notice" style="color: white;
-                text-align: center;
-                font-size: 20px;
-                margin: 30px 0; "><%= flash[:success] %></div>
+                    <div class="notice" style="color: white;
+                    text-align: center;
+                    font-size: 20px;
+                    margin: 30px 0; "><%= flash[:success] %></div>
                 <% end %>
                 <div class="fullwidth phone-number margin-bottom-60">
                     <div class="s-12 m-6 l-6 margin-s-bottom-60">
@@ -104,7 +104,7 @@
     <script type="text/javascript" src="/catalog/view/javascript/common.js"></script>
 
     <script type="text/javascript" src="/catalog/view/javascript/custom.js"></script>
-
+    <%= javascript_include_tag :application %> 
     <script>
         window.onload = function () {
             for (var i in initializeFunctions) {
@@ -112,6 +112,7 @@
             }
         }
     </script>
+    
     <script>
         function validate(e) {
             var error = $('.errorwrap');
@@ -132,5 +133,6 @@
             }
         }
     </script>
+    <%= yield :footer_js %>
 </footer>
 <!-- FOOTER END -->

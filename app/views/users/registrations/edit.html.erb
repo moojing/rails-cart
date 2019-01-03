@@ -1,43 +1,75 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+ 
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+<div id="page-main-content">
+  
+   
+    <div class="section">
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <div class="line">
+            <h1 class="text-center">會員中心</h1>
+            <hr class="break-small break-center">
+            <div class="row">
+                <%= render 'users/shared/aside'%>
+                <div id="content" class="col-sm-9 col-sm-pull-3">
+                        <ul id="user_error_explanation">
+                                <% @user.errors.full_messages.each do |msg| %>
+                                <li class="user_error_field"> <%= msg %></li>    
+                                <% end %>
+                        </ul>
+                            
+                        <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+                        html: { method: :put ,class: "customform payform"}) do |f| %>
+                        
+                        <div class="margin-bottom-30 padding border-1">
+                            <div class="line">
+                                <h4>個人資料</h4>
+                                <hr class="break-small">
+                                <div class="margin">
+                                    <div class="s-12 m-6 l-6">
+                                        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder:"姓" %>
+                                    </div>
+                                    <div class="s-12 m-6 l-6">
+                                        <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder:"名" %>
+                                    </div>
+                                </div>
+                                <div class="fullwidth">
+                                    <%= f.text_field :telephone, autofocus: true, autocomplete: "telephone", placeholder:"連絡電話" %>
+                                </div>
+                                <div class="fullwidth">
+                                    <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"電子郵件" %>
+    
+                                </div>
+                                <div class="fullwidth">
+                                    <%= f.text_field :address, autofocus: true, autocomplete: "address",placeholder:"地址" %>
+                                </div>
+                                <div class="fullwidth">
+                                        <%= f.password_field :password, autocomplete: "new-password",placeholder:"新密碼" %>
+                                        <% if @minimum_password_length %>
+                                          <br />
+                                          <em style="color:#a2a2a2;"><%= @minimum_password_length %> characters minimum ,if you dont want to change password , just leave it blank.</em>
+                                        <% end %>
+                                </div>
+                                <div class="fullwidth">
+                                <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"確認新密碼" %>
+                                </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+                                <div class="fullwidth">
+                                        <%= f.password_field :current_password, autocomplete: "current-password",placeholder:"目前密碼" %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons clearfix">
+                            <div class="pull-right">
+                                    <%= f.submit "Update" %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
