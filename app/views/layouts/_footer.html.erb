@@ -31,34 +31,35 @@
         <!-- contact form -->
 
         <div class="line">
-            <%= form_tag( contacts_path,method: "post", class: "footer-form") do |f| -%>
+            <form action="/contacts" id="footer-form" class="footer-form" onsubmit=" event.preventDefault(); validate(this);">
            
-                <!-- onsubmit="return validate(this); -->
                 <div class="fullwidth">
                     <div class="margin">
                         <div class="s-12 m-6 l-6">
-                            <input type="text" name="contact[name]" placeholder="姓名" title="姓名" required />
+                            <input type="text" name="name" placeholder="姓名" title="姓名" />
                         </div>
                         <div class="s-12 m-6 l-6">
-                            <input type="text" name="contact[mail]" placeholder="Email" title="Email" required />
+                            <input type="text" name="mail" placeholder="Email" title="Email" required />
                         </div>
                     </div>
                     <div class="margin">
                         <div class="s-12 m-6 l-6">
-                            <input type="text" name="contact[phone]" placeholder="聯絡電話" title="聯絡電話" required />
+                            <input type="text" name="phone" placeholder="聯絡電話" title="聯絡電話"   />
                         </div>
                     </div>
 
                     <div class="s-12">
-                        <textarea name="contact[note]" placeholder="留言" rows="2" required></textarea>
+                        <textarea name="note" placeholder="留言" rows="2"  ></textarea>
                     </div>
-                    <div class="s-12 text-center errorwrap">
+                    <div class="s-12 text-center errorwrap " style="color:white">
+                       
                     </div>
                     <div class="s-12 m-12 l-4 l-offset-4">
                         <input type="submit" class="button" value="送出">
                     </div>
                 </div>
-            <%end -%>
+            </form>
+            
         </div>
 
     </div>
@@ -118,19 +119,31 @@
             var error = $('.errorwrap');
             var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             error.html('');
-            if (e.name.value.length < 2 || e.name.value.length > 22) {
+            
+            
+            if (e['name'].value.length < 2 || e['name'].value.length > 22) {
                 error.append("<p><span class='errorbox'>姓名長度須介於2至22字！</span></p>");
             }
-            if (e.enquiry.value.length < 10 || e.enquiry.value.length > 3000) {
-                error.append("<p><span class='errorbox'>留言請至少輸入10個字！</span></p>");
+            if (e['phone'].value.length < 10 || e['phone'].value.length > 3000) {
+                error.append("<p><span class='errorbox'>電話請至少輸入10個字！</span></p>");
             }
-            if (!emailReg.test(e.email.value)) {
+            if (!emailReg.test(e['mail'].value)) {
                 error.append("<p><span class='errorbox'>Email格式錯誤！</span></p>");
             }
             if (error.html().length > 0) {
                 error.slideDown();
                 return false;
-            }
+            }else{
+               
+                let data = {} ;
+                $("#footer-form").serializeArray().map(serial=>{
+                    data[serial.name] = serial.value
+                })
+                $.post('/contacts',{contact:data},function(data){
+                    console.log('data',data)
+                    $("#footer-form")[0].reset()
+                })
+            } 
         }
     </script>
     <%= yield :footer_js %>

@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
     
     def create 
+         
         @contact = Contact.new(contact_params)
         if @contact.save 
             render json: {status: 200,message: 'Your message has been successfully sent.'}
