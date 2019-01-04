@@ -140,7 +140,7 @@
                     data[serial.name] = serial.value
                 })
                 $.post('/contacts',{contact:data},function(data){
-                    console.log('data',data)
+                    toastr.info(data.message, 'Thank you!!', {timeOut: 5000})
                     $("#footer-form")[0].reset()
                 })
             } 
@@ -148,4 +148,5 @@
     </script>
     <%= yield :footer_js %>
 </footer>
+ 
 <!-- FOOTER END -->
