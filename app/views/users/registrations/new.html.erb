@@ -21,12 +21,13 @@
                     <div class="fullwidth">
                        
                              
-                                    
+<!--                                     
                             <ul id="user_error_explanation">
+                                
                                 <% @user.errors.full_messages.each do |msg| %>
                                 <li class="user_error_field"> <%= msg %></li>    
                                 <% end %>
-                            </ul>
+                            </ul> -->
                             
                             
                            
@@ -35,6 +36,7 @@
                                 <div class="s-12 m-6 l-6">
                                     <input type="text" name="user[last_name]" value="" placeholder="姓氏" />
                                 </div>
+                                
                                 <div class="s-12 m-6 l-6">
                                     <input type="text" name="user[first_name]" value="" placeholder="名字"  />
                                 </div>
@@ -43,7 +45,10 @@
                                 <input type="tel" name="user[telephone]" value="" placeholder="聯絡電話" />
                             </div>
                             <div class="fullwidth">
-                                <input type="email" name="user[email]" value="" placeholder="Email 信箱（帳號）"   />
+                                <input type="email" name="user[email]" value="" class="<%= @user.errors.messages[:email].length>0 ? 'error-input' : '' %>" placeholder="Email 信箱（帳號）"   />
+                                <% if @user.errors.messages[:email].length>0 %>
+                                <span class="error_message"><%= @user.errors.messages[:email][0]%></span>
+                                <%end%>
                             </div>
                                   
                             <div class="fullwidth">
@@ -53,10 +58,16 @@
 
                             <div class="margin">
                                 <div class="s-12 m-6 l-6">
-                                    <input type="password" name="user[password]" value="" placeholder="密碼" />
+                                    <input type="password" name="user[password]" class="<%= @user.errors.messages[:password].length>0 ? 'error-input' : '' %>" value="" placeholder="密碼" />
+                                    <% if @user.errors.messages[:password].length>0 %>
+                                    <span class="error_message"><%= @user.errors.messages[:password][0]%></span>
+                                    <%end%>
                                 </div>
                                 <div class="s-12 m-6 l-6">
-                                    <input type="password" name="user[password_confirmation]" value="" placeholder="確認密碼" />
+                                    <input type="password" name="user[password_confirmation]"  class="<%= @user.errors.messages[:password_confirmation].length>0 ? 'error-input' : '' %>"  value="" placeholder="確認密碼" />
+                                    <% if @user.errors.messages[:password_confirmation].length>0 %>
+                                    <span class="error_message"><%= @user.errors.messages[:password_confirmation][0]%></span>
+                                    <%end%>
                                 </div>
                             </div>
  
@@ -71,12 +82,16 @@
 
                         <%end%>
 
-                        
+                        <style>
+                         .error_message{
+                            margin-top: -45px;
+                         }
+                        </style>
                     </div>
                 </div>
                
             </div>
         </div>
     </div>
- 
-     
+
+  

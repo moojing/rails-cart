@@ -14,11 +14,12 @@
             <div class="row">
                 <%= render 'users/shared/aside'%>
                 <div id="content" class="col-sm-9 col-sm-pull-3">
+<!--                         
                         <ul id="user_error_explanation">
                                 <% @user.errors.full_messages.each do |msg| %>
                                 <li class="user_error_field"> <%= msg %></li>    
                                 <% end %>
-                        </ul>
+                        </ul> -->
                             
                         <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
                         html: { method: :put ,class: "customform payform"}) do |f| %>
@@ -39,34 +40,57 @@
                                     <%= f.text_field :telephone, autofocus: true, autocomplete: "telephone", placeholder:"連絡電話" %>
                                 </div>
                                 <div class="fullwidth">
-                                    <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"電子郵件" %>
+                                    <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder:"電子郵件",
+                                    class: @user.errors.messages[:email].length>0 ? 'error-input' : '' %>
+
+                                    <% if @user.errors.messages[:email] -%>
+                                    <span class="error_message" ><%= @user.errors.messages[:email][0]%></span>
+                                    <%end%>
     
                                 </div>
                                 <div class="fullwidth">
                                     <%= f.text_field :address, autofocus: true, autocomplete: "address",placeholder:"地址" %>
                                 </div>
                                 <div class="fullwidth">
-                                        <%= f.password_field :password, autocomplete: "new-password",placeholder:"新密碼" %>
-                                        <% if @minimum_password_length %>
-                                          <br />
-                                          <em style="color:#a2a2a2;"><%= @minimum_password_length %> characters minimum ,if you dont want to change password , just leave it blank.</em>
-                                        <% end %>
+                                        <%= f.password_field :password, autocomplete: "new-password",placeholder:"新密碼 (最多"+@minimum_password_length.to_s+"碼,如不修改則留空即可)",
+                                        class: @user.errors.messages[:password].length>0 ? 'error-input' : '' %>
+
+                                        <% if @user.errors.messages[:password_confirmation] -%>
+                                            <span class="error_message" ><%= @user.errors.messages[:password_confirmation][0]%></span>
+                                        <%end%>
+                                        
                                 </div>
                                 <div class="fullwidth">
-                                <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"確認新密碼" %>
+                                    <%= f.password_field :password_confirmation, autocomplete: "new-password",placeholder:"確認新密碼" ,
+                                    class: @user.errors.messages[:password_confirmation].length>0 ? 'error-input' : '' %>
+
+                                    <% if @user.errors.messages[:password_confirmation] -%>
+                                        <span class="error_message" ><%= @user.errors.messages[:password_confirmation][0]%></span>
+                                    <%end%>
+                                    
                                 </div>
 
                                 <div class="fullwidth">
-                                        <%= f.password_field :current_password, autocomplete: "current-password",placeholder:"目前密碼" %>
+                                        <%= f.password_field :current_password, autocomplete: "current-password", placeholder:"目前密碼",class: @user.errors.messages[:current_password].length>0 ? 'error-input' : ''  %>
+                                          
+                                        <% if @user.errors.messages[:current_password] -%>
+                                        <span class="error_message" ><%= @user.errors.messages[:current_password][0]%></span>
+                                        <%end%>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="buttons clearfix">
                             <div class="pull-right">
                                     <%= f.submit "Update" %>
                             </div>
                         </div>
                     <% end %>
+                    <style>
+                        .error_message{
+                            margin-top: -10px;
+                        }
+                    </style>
                 </div>
             </div>
         </div>

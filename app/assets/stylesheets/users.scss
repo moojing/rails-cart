@@ -4,5 +4,19 @@
 
 
 // edit 
-
- 
+$color-error:#de5151;
+.customform input{
+    &::placeholder{
+        color:#b5b5b5;
+    }
+} 
+.error-input{
+    border-bottom: 1px solid $color-error !important;
+   
+}
+.error_message{
+    display: block;
+    color:$color-error;
+    margin-left: 15px;
+    
+}
