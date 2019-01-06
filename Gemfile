@@ -58,5 +58,8 @@ end
 gem 'devise'
 gem 'mysql2'
 gem 'toastr-rails'
+gem 'summernote-rails', '~> 0.8.10.0'
+gem "shrine", "~> 2.0"
+gem 'image_processing', '~> 1.0'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

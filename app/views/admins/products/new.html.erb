@@ -1,1 +1,48 @@
-new 
+ 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+
+
+          <textarea id="summernote" name="editordata"></textarea>
+        
+        
+          <%= form_for [:admins,@product] do |f|%>
+            <%= f.text_field :name    %>
+            <%= f.hidden_field :image, value: @product.cached_image_data  %>
+            <%=f.file_field :image%>
+            <%=f.submit%>
+          <%end%>
+
+
+        <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery?%>
+
+
+
+<% content_for :js do %>
+<script>
+  $(document).ready(function() {
+    $('#summernote').summernote(
+      { height: 300,
+        callbacks: {
+          onImageUpload: function(files) {
+           
+           let formData = new FormData();
+           formData.append('upload', files[0]);
+           $.ajax({
+              type: "POST", 
+              url: '/upload' + "?authenticity_token=" + AUTH_TOKEN, 
+              data:formData,
+              beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+              cache       : false,
+              contentType : false,
+              processData : false,
+              success     : function(data, textStatus, jqXHR){
+                let url = "/uploads/"+data.imageUrl
+                $('#summernote').summernote('insertImage', url, 'newimage');
+              }
+            });
+          }
+        }
+      });
+  }); 
+</script>
+<% end %>

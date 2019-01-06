@@ -3,7 +3,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
     create_table :products do |t|
       t.string :name
       t.text :content
-      t.string :image
+      t.text :image_data
 
       t.timestamps
     end

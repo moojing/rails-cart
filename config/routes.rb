@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get '/account/address' , :to=>'account#address'
   
     get '/cart' , :to=> 'cart#show'
-    
+    post '/upload' , :to=> 'upload#create'
     post '/contacts' , :to=> 'contacts#create'
     
     devise_for :users, controllers: {

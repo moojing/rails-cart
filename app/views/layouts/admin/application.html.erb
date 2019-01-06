@@ -20,7 +20,7 @@
     <link href="/dashboard/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- jQuery custom content scroller -->
     <link href="/dashboard/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
-    <%= javascript_include_tag :application %>
+    <%= javascript_include_tag "admins/application" %>
     <!-- Custom Theme Style -->
     <link href="/dashboard/build/css/custom.min.css" rel="stylesheet">
   </head>
@@ -95,13 +95,11 @@
   
           <!-- page content -->
           <div class="right_col" role="main">
-            <div class="">
-              <div class="page-title">
-               
-                  <%= yield %>
-                 
+           
+              <div class="page-content" style="margin-top:70px">
+                <%= yield %>
               </div>
-            </div>
+          
           </div>
           <!-- /page content -->
   
@@ -122,6 +120,9 @@
     <script src="/dashboard/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="/dashboard/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
     <!-- FastClick -->
     <script src="/dashboard/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
@@ -131,6 +132,9 @@
 
     <!-- Custom Theme Scripts -->
     <script src="/dashboard/build/js/custom.min.js"></script>  
-
+    
   </body>
+  
+  <%= yield :js%>
+  
 </html>
