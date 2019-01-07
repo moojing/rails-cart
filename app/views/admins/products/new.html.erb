@@ -29,7 +29,7 @@
            formData.append('upload', files[0]);
            $.ajax({
               type: "POST", 
-              url: '/upload' + "?authenticity_token=" + AUTH_TOKEN, 
+              url: '/upload',
               data:formData,
               beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
               cache       : false,
