@@ -1,21 +1,65 @@
  
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+      <form action="/admins/products" method="post" >
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div class="form-group">
+          <label for="name">name</label>
+          <input type="text" class="form-control" name="product[name]" id="name"  >
+        </div>
+        
+        <div class="form-group">
+          <label for="price">price</label>
+          <input type="text" class="form-control" name="product[price]" id="price"  >
+        </div>
+
+        <div class="form-group">
+          <label for="sku">sku</label>
+          <input type="text" class="form-control" name="product[sku]" id="sku"  >
+        </div>
+        
+        <div class="form-group">
+          <label for="stock">stock</label>
+          <input type="text" class="form-control" name="product[stock]" id="stock" >
+        </div>
 
 
-          <textarea id="summernote" name="editordata"></textarea>
-        
-        
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select name="product[category_id]" id="category"  class="form-control" >
+            <% @categories.each do |c| %>
+            
+            <option value=<%= c.id %>> <%=c.name%></option>
+            <%end%>
+           
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="enable">Enable</label>
+          <select name="product[enable]" id="enable"  class="form-control" >
+            <option value="1">true</option>
+            <option value="0">false</option>
+          </select>
+        </div>
+
+       
+       
+        <textarea id="summernote" name="product[content]"></textarea>
+
+        <button type="submit" class="btn btn-primary">Submit</button> 
+      </form>
+
+        <!--         
           <%= form_for [:admins,@product] do |f|%>
             <%= f.text_field :name    %>
             <%= f.hidden_field :image, value: @product.cached_image_data  %>
             <%=f.file_field :image%>
             <%=f.submit%>
-          <%end%>
+          <%end%> -->
 
 
-        <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery?%>
-
-
+       
 
 <% content_for :js do %>
 <script>
