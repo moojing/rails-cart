@@ -46,9 +46,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'pry-rails'
   gem 'pry-nav'
-  gem 'hirb-unicode'
+  
 end
-
+gem 'hirb-unicode'
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
