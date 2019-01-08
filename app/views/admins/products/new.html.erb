@@ -51,10 +51,7 @@
             </label>
           </div>
           <div class="panel-body" id="image-upload-box">
-            <img src="" alt="">
-            <input type="hidden" name="product[image][id]">
-
-
+           
           </div>
         </div>
         
@@ -77,16 +74,26 @@
           (data, textStatus, jqXHR)=>{
             let url = "/uploads/"+data.imageUrl
             $('#image-upload-box').append(`
-            <div class="col-md-3"><div class="thumbnail">  
-            '<img class="img-rounded" src="${url}" alt="" width="300">
-            <input type="hidden" name="product[image][id]" value="${data.image_id}">
+            <div class="col-md-3 image-box"><div class="thumbnail">  
+                <div class="close">x</div>
+            <img class="img-rounded" src="${url}" alt="" width="300">
+            <input type="hidden" name="product[image_id][]" value="${data.image_id}">
             </div></div>`)    
           })
         
-    });
+  });
+ 
 
-
-   
+  $('#image-upload-box').on("click",'.close', function(e){
+    let image_id = $(this).nextAll('input[type="hidden"]')[0].value
+    
+    imageDelete(image_id).done((res)=>{
+      if (res.message==='200'){
+        $(this).parent().parent().remove()
+      }
+    })
+});
+  
 
 
   $(document).ready(function() {
@@ -101,6 +108,8 @@
           }
         }
       });
+
+ 
   }); 
 
 </script>

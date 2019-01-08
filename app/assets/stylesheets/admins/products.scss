@@ -1,3 +1,21 @@
-// Place all the styles related to the admins/products controller here.
+ // Place all the styles related to the admins/products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.image-box{
+    position: relative; 
+     .close{
+         position: absolute; 
+         right: 10px;
+         top: 10px;
+         font-size: 20px;
+         width: 30px;
+         height: 30px;
+         border-radius: 50%;
+         cursor: pointer;
+     }
+  }
+   
+  

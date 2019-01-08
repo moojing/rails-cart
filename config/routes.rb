@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   
     get '/cart' , :to=> 'cart#show'
     post '/upload' , :to=> 'upload#create'
+    delete '/upload/delete/:image_id' , :to=> 'upload#delete'
     
     post '/contacts' , :to=> 'contacts#create'
     

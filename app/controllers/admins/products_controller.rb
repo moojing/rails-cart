@@ -21,6 +21,12 @@ class Admins::ProductsController < Admins::ApplicationController
         if @product.valid?
           @product.save
           product_id = @product.id 
+          
+          images = params[:product][:image_id] 
+          images.each do |image|
+            @product.image << Image.find(image)
+          end
+          
           ProductCategory.create!(category_id: category_id, product_id: product_id) 
           
           redirect_to admin_root_path

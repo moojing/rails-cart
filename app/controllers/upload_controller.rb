@@ -11,6 +11,12 @@ class UploadController < ApplicationController
         end 
           
    end 
+   def delete 
+        Image.destroy(params[:image_id])
+        render json: {"message":"200",image_id:params[:image_id]}
+   end 
+
+
     private
 
     def upload_params
