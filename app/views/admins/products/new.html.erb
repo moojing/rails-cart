@@ -43,35 +43,71 @@
           </select>
         </div>
 
+        <div class="panel panel-info">
+          <div class="panel-heading" >Product Images 
+            <label style="margin-left: 30px;" class="btn btn-info ">
+              ＋
+              <input type="file" accept="image/jpeg,image/png"  id="imageUploader" style="display: none;">
+            </label>
+          </div>
+          <div class="panel-body" id="image-upload-box">
+            <img src="" alt="">
+            <input type="hidden" name="product[image][id]">
+
+
+          </div>
+        </div>
+        
        
-       
+        <label for="summernote"> Content</label>
         <textarea id="summernote" name="product[content]"></textarea>
 
         <button type="submit" class="btn btn-primary">Submit</button> 
       </form>
 
-        <!--         
-          <%= form_for [:admins,@product] do |f|%>
-            <%= f.text_field :name    %>
-            <%= f.hidden_field :image, value: @product.cached_image_data  %>
-            <%=f.file_field :image%>
-            <%=f.submit%>
-          <%end%> -->
-
+       
 
        
 
 <% content_for :js do %>
 <script>
+   $('input[type="file"]#imageUploader').change(function(event){
+        
+        imageUpload(event.currentTarget.files).done(
+          (data, textStatus, jqXHR)=>{
+            let url = "/uploads/"+data.imageUrl
+            $('#image-upload-box').append(`
+            <div class="col-md-3"><div class="thumbnail">  
+            '<img class="img-rounded" src="${url}" alt="" width="300">
+            <input type="hidden" name="product[image][id]" value="${data.image_id}">
+            </div></div>`)    
+          })
+        
+    });
+
+
+   
+
+
   $(document).ready(function() {
     $('#summernote').summernote(
       { height: 300,
         callbacks: {
           onImageUpload: function(files) {
-           
-           let formData = new FormData();
-           formData.append('upload', files[0]);
-           $.ajax({
+            imageUpload(files).done((data, textStatus, jqXHR)=>{
+                let url = "/uploads/"+data.imageUrl
+                $('#summernote').summernote('insertImage', url, 'newimage');
+              })
+          }
+        }
+      });
+  }); 
+
+
+  function imageUpload(files){
+    let formData = new FormData();
+    formData.append('upload', files[0]);
+    return $.ajax({
               type: "POST", 
               url: '/upload',
               data:formData,
@@ -79,14 +115,8 @@
               cache       : false,
               contentType : false,
               processData : false,
-              success     : function(data, textStatus, jqXHR){
-                let url = "/uploads/"+data.imageUrl
-                $('#summernote').summernote('insertImage', url, 'newimage');
-              }
+         
             });
-          }
-        }
-      });
-  }); 
+  }
 </script>
 <% end %>

@@ -7,7 +7,7 @@ class UploadController < ApplicationController
         
         if @upload.valid?
             @upload.save
-            render json: {"message":"200",imageUrl:@upload.image[:original].id}
+            render json: {"message":"200",imageUrl:@upload.image[:original].id,image_id: @upload.id}
         end 
           
    end 
