@@ -1,0 +1,140 @@
+ 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+<form action="/admins/products/<%=@product.id%>" method="post" id="editform">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="hidden" name="_method" value="put" />
+  <div class="form-group">
+    <label for="name">name</label>
+    <input type="text" class="form-control" name="product[name]" id="name" value="<%=@product.name.nil? ? '' : @product.name%>"   >
+  </div>
+  
+  <div class="form-group">
+    <label for="price">price</label>
+    <input type="text" class="form-control" name="product[price]" id="price"  value="<%=@product.price.nil? ? '' : @product.price%>"  >
+  </div>
+
+  <div class="form-group">
+    <label for="sku">sku</label>
+    <input type="text" class="form-control" name="product[sku]" id="sku" value="<%=@product.sku.nil? ? '' : @product.sku%>"  >
+  </div>
+  
+  <div class="form-group">
+    <label for="stock">stock</label>
+    <input type="text" class="form-control" name="product[stock]" id="stock" >
+  </div>
+
+   
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select name="product[category_id]" id="category"  class="form-control" >
+      <% @categories.each do |c| %>
+      <% if @product.categories.exists?%>
+        <option value=<%= c.id %> <%=  c.id == @product.categories[0].id ? 'select': '' %>> <%=c.name%></option>
+      <%else%>
+        <option value=<%= c.id %>> <%=c.name%></option>
+      <%end%>
+      <%end%>
+     
+    </select>
+  </div>
+
+
+  <div class="form-group">
+    <label for="enable">Enable</label>
+    <select name="product[enable]" id="enable"  class="form-control" >
+      <option value="1" <%= @product.enable ? 'selected' :''%> >true</option>
+      <option value="0">false</option>
+    </select>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading" >Product Images 
+      <label style="margin-left: 30px;" class="btn btn-info ">
+        ＋
+        <input type="file" accept="image/jpeg,image/png"  id="imageUploader" style="display: none;">
+      </label>
+    </div>
+    <div class="panel-body" id="image-upload-box">
+     
+    </div>
+  </div>
+  
+ 
+  <label for="summernote"> Content</label>
+  <%= @product.content.nil?%>
+  <textarea id="summernote" name="product[content]"  >
+      <%= @product.content.nil? ? '' : @product.content%>
+  </textarea>
+
+  <button type="submit" class="btn btn-primary">Submit</button> 
+</form>
+
+ 
+
+ 
+
+<% content_for :js do %>
+<script>
+$('input[type="file"]#imageUploader').change(function(event){
+  
+  imageUpload(event.currentTarget.files).done(
+    (data, textStatus, jqXHR)=>{
+      let url = "/uploads/"+data.imageUrl
+      $('#image-upload-box').append(`
+      <div class="col-md-3 image-box"><div class="thumbnail">  
+          <div class="close">x</div>
+      <img class="img-rounded" src="${url}" alt="" width="300">
+      <input type="hidden" name="product[image_id][]" value="${data.image_id}">
+      </div></div>`)    
+    })
+  
+});
+
+
+$('#image-upload-box').on("click",'.close', function(e){
+let image_id = $(this).nextAll('input[type="hidden"]')[0].value
+
+imageDelete(image_id).done((res)=>{
+if (res.message==='200'){
+  $(this).parent().parent().remove()
+}
+})
+});
+
+
+
+$(document).ready(function() {
+      
+    $('#summernote').summernote(
+    { height: 300,
+      callbacks: {
+        onImageUpload: function(files) {
+          imageUpload(files).done((data, textStatus, jqXHR)=>{
+              let url = "/uploads/"+data.imageUrl
+              
+              $('#summernote').summernote('insertImage', url, 'newimage');
+            })
+        },
+      }
+    });
+    let  product_id  = $('#editform')[0].action.split('/').pop()
+    console.log('product_id',product_id)
+    imageGet(product_id).done((res)=>{
+       console.log('res',res)
+       res.images.forEach(image=>{
+
+          let url = "/uploads/"+image.imageUrl
+          $('#image-upload-box').append(`
+          <div class="col-md-3 image-box"><div class="thumbnail">  
+              <div class="close">x</div>
+          <img class="img-rounded" src="${url}" alt="" width="300">
+          <input type="hidden" name="product[image_id][]" value="${image.id}">
+          </div></div>`)   
+          })
+    })
+
+
+}); 
+
+</script>
+<% end %>

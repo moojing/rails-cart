@@ -1,3 +1,22 @@
+
+//= require rails-ujs
+//= require activestorage
+
+
+function imageGet(product_id){
+  
+    return $.ajax({
+            type: "GET", 
+            url: `/upload/products/${product_id}`,
+            beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+            cache       : false,
+            contentType : false,
+            processData : false,
+      
+          });
+}
+
+
 function imageUpload(files){
     let formData = new FormData();
     formData.append('upload', files[0]);

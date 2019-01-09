@@ -1,5 +1,15 @@
 class UploadController < ApplicationController
-
+   def show 
+    
+    images = Product.find(params[:id]).image
+    image_arr = []
+    
+    images.each do |image|
+        image_arr << {:imageUrl => image.image[:original].id , :id=>image.id}
+    end
+    render json: {"message":"200",images:image_arr } 
+            
+   end
    def create 
      
         mydata = {:image => params[:upload]}
