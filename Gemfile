@@ -63,5 +63,6 @@ gem 'summernote-rails', '~> 0.8.10.0'
 gem "shrine", "~> 2.0"
 gem 'image_processing', '~> 1.0'
 gem 'kaminari'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

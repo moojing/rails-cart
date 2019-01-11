@@ -19,27 +19,17 @@ class ImageUploader < Shrine
       validate_max_height 5000
     end
   end
-
   process(:store) do |io, context|
     versions = { original: io } # retain original
-    
+
     io.download do |original|
       pipeline = ImageProcessing::MiniMagick.source(original)
-  
+
       versions[:large]  = pipeline.resize_to_limit!(800, 800)
       versions[:medium] = pipeline.resize_to_limit!(500, 500)
       versions[:small]  = pipeline.resize_to_limit!(300, 300)
     end
 
-    original = io.download
-
-    thumbnail = ImageProcessing::MiniMagick
-      .source(original)
-      .resize_to_limit!(600, nil)
-      
-
-    original.close!
-
-    { original: io, thumbnail: thumbnail, }
+    versions # return the hash of processed files
   end
 end

@@ -1,0 +1,73 @@
+ 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+  <%=form_for [:admins,@category] do |f|%>
+  <div class="form-group">
+    <%=f.label :name , 'Category Name'  %>
+    <%=f.text_field :name , class: "form-control"%>
+  </div>
+
+   
+  
+ 
+  
+  
+  <div class="form-group">
+    <label for="child_category">Child Category</label>
+    <select name="category[child_id]" id="child_category"  class="form-control" >
+        <option value="-1">none</option>
+      <% @categories_childable.each do |c| %>
+      <option value=<%= c.id %>> <%=c.name%></option>
+      <%end%>
+    </select>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-md-6">
+        <%=f.submit 'Submit', class: 'btn btn-primary'%>
+    </div>
+    
+    <div class="col-md-3 ">
+        <label for="category_image" class="btn btn-default">Choose Category Image</label>
+        <%=f.hidden_field :image, value: @category.cached_image_data , id:"hidden_image"%>
+        <!-- <input type="file" onchange="" style="display:none;"  name="category[image]" id="image_upload"> -->
+        <%=f.file_field :image ,onchange:"readURL(this)" , style:"display:none;"%>
+        <div class="thumbnail">
+        <img id="img_prev" src="" alt="your img_prev" sclass="img-rounded"   />
+      </div>
+    </div>
+  </div>
+  
+  <%end%>
+ 
+  
+ 
+ 
+  <%content_for :js do%>
+    <script>
+     function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#img_prev')
+              .attr('src', e.target.result);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      } 
+    </script>
+  <%end%>
+
+
+  <style>
+  .thumbnail{
+    height:auto;
+  }
+  </style>
+ 
+
+ 
+
+ 

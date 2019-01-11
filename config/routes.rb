@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  
+   
   namespace :admins do
     resources 'users'
     resources 'products'
+    resources 'categories'
   end
   root :to => 'pages#home'
 
