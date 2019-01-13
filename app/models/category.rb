@@ -14,4 +14,12 @@ class Category < ApplicationRecord
     def has_child? 
         Category.where(:parent_id=>self.id).exists?
     end
+
+    def parent 
+        if !self.parent_id.nil?
+        Category.find(self.parent_id)
+        else 
+            nil
+        end
+    end 
 end

@@ -27,7 +27,7 @@
             <% @categories.each_with_index do |category,index|%>
             <tr>
               <th scope="row"><%= category.id%></th>
-              <td><%= category.name%></td>
+              <td><%= category.parent ? "#{category.parent.name} >> " : '' %>  <%= category.name%></td>
               <td><%= category.child_id.nil? ? '-' : category.child_id%></td>  
               <td><%= category.kind==0 ? 'Top layer' : 'Child'%></td>
               <td><%= category.created_at%></td>

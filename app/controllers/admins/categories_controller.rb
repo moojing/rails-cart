@@ -5,15 +5,21 @@ class Admins::CategoriesController < Admins::ApplicationController
   end
 
   def new
-    @category = Category.new()
-    @categories_childable =  Category.where(:kind=>0)
+    @category = Category.new
+    @categories_parentable =  Category.where(:kind=>0)
     
   end
   
   def create
-    binding.pry 
+     
     check_child
     @category = Category.create!(category_params)
+
+    if params[:category][:parent_id].to_i !=-1
+      @category.kind = 1 
+      @category.save
+    end 
+
     if  @category.valid?
       flash[:success] = "Category has been created!!"
       redirect_to admins_categories_path 
@@ -57,7 +63,9 @@ class Admins::CategoriesController < Admins::ApplicationController
     if params[:category][:parent_id].to_i !=-1
       parent = params[:category][:parent_id]
       Category.find(parent).update(:kind=>0)
-      Category.find(params[:id]).update(:kind=>1)
+      if !params[:id].nil?
+        Category.find(params[:id]).update(:kind=>1)
+      end
     else  
       Category.find(params[:id]).update(:kind=>0)
       params[:category][:parent_id] = nil

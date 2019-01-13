@@ -7,14 +7,15 @@
   </div>
   
   <div class="form-group">
-    <label for="child_category">Child Category</label>
-    <select name="category[child_id]" id="child_category"  class="form-control" >
-        <option value="-1">none</option>
-      <% @categories_childable.each do |c| %>
-      <option value=<%= c.id %>> <%=c.name%></option>
-      <%end%>
-    </select>
-  </div>
+      <label for="parent_category">Upper  Category</label>
+      <select name="category[parent_id]" id="parent_category"  class="form-control"   >
+          <option value="-1">none</option>
+        <% @categories_parentable.each do |c| %>
+        <option value=<%= c.id %> <%= c.is_child? ? 'disabled' : '' %>> <%=c.name%></option>
+        <%end%>
+      </select>
+      <span style="color:#c7c5c5;"> <%=@category.is_child? ? ''  : "Top category that has child can't  have parent."%> </span>
+    </div>
   
   <div class="row">
     <div class="col-md-6">
