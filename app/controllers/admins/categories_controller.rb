@@ -11,6 +11,7 @@ class Admins::CategoriesController < Admins::ApplicationController
   end
   
   def create
+    binding.pry 
     check_child
     @category = Category.create!(category_params)
     if  @category.valid?
@@ -25,7 +26,7 @@ class Admins::CategoriesController < Admins::ApplicationController
   def update
     check_child
     @category = Category.find(params[:id])
-    @category.image=nil
+    # @category.image=nil
     @category.update(category_params)
     if  @category.valid?
       flash[:success] = "Category has been updated!!"
@@ -38,8 +39,8 @@ class Admins::CategoriesController < Admins::ApplicationController
 
   def edit
     @category = Category.find(params[:id])
-    @categories_childable =  Category.where(:kind=>0)
-    @is_child = @category.kind==1 ? true : false 
+    @categories_parentable =  Category.where(:kind=>0)
+     
     # binding.pry
   end
 
@@ -52,14 +53,18 @@ class Admins::CategoriesController < Admins::ApplicationController
   protected
 
   def check_child
-    if params[:category][:child_id].to_i !=-1
-      child = params[:category][:child_id]
-      Category.find(child).update(:kind=>1)
+    
+    if params[:category][:parent_id].to_i !=-1
+      parent = params[:category][:parent_id]
+      Category.find(parent).update(:kind=>0)
+      Category.find(params[:id]).update(:kind=>1)
     else  
-      params[:category][:child_id] = nil
+      Category.find(params[:id]).update(:kind=>0)
+      params[:category][:parent_id] = nil
     end
   end
+
   def category_params
-    params.require(:category).permit(:name,:child_id,:image)
+    params.require(:category).permit(:name,:parent_id,:image)
   end
 end

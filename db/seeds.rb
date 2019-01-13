@@ -14,20 +14,22 @@ User.create!(email:'user@gmail.com',password:'123456',password_confirmation:'123
     User.create!(email:Faker::Internet.unique.email,password:'123456',password_confirmation:'123456')
 end
 
-20.times do |i|
-    Product.create!(
-        :sku => Faker::Number.number(2) ,
-        :name => Faker::Creature::Cat.breed,
-        :content => Faker::Movies::StarWars.quote ,
-        :price => Faker::Number.number(3) ,
-        :stock => Faker::Number.number(2),
-        :enable => 1) 
-end
-
-
-5.times do 
+category = ['化妝品','美髮用品','保養品','日用品','獨家產品'] 
+5.times do |i| 
     Category.create!(
-        :name=>Faker::Coffee.variety,
+        :name=>category[i],
         :kind=>0
     )
 end 
+
+
+10.times do |i|
+    Product.create!(
+        :stock => Faker::Number.number(2) ,
+        :name => Faker::Creature::Cat.breed,
+        :content => Faker::Movies::StarWars.quote ,
+        :price => Faker::Number.number(3) ,
+        :sku => Faker::Bank.swift_bic ,
+        :enable => 1) 
+end
+

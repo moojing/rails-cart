@@ -12,14 +12,14 @@
 
 
 <div class="form-group">
-  <label for="child_category">Child Category</label>
-  <select name="category[child_id]" id="child_category"  class="form-control" <%=@is_child ? 'disabled':''%> >
+  <label for="parent_category">Upper  Category</label>
+  <select name="category[parent_id]" id="parent_category"  class="form-control"   >
       <option value="-1">none</option>
-    <% @categories_childable.each do |c| %>
-    <option value=<%= c.id %>> <%=c.name%></option>
+    <% @categories_parentable.each do |c| %>
+    <option value=<%= c.id %> <%= c.id.to_s==params[:id].to_s ||@category.has_child? ? 'disabled' : '' %>> <%=c.name%></option>
     <%end%>
   </select>
-  <span style="color:#c7c5c5;"> <%=@is_child ? "Child category can't not have another child."  : ''%> </span>
+  <span style="color:#c7c5c5;"> <%=@category.is_child? ? ''  : "Top category that has child can't  have parent."%> </span>
 </div>
 
 
@@ -29,10 +29,10 @@
   </div>
   
   <div class="col-md-3 ">
-      <label for="image_upload" class="btn btn-default">Choose Category Image</label>
-      <%=f.hidden_field :image, value: @category.cached_image_data%>
-      <input type="file" onchange="readURL(this)" style="display:none" name="category[image]" id="image_upload">
-
+      <label for="category_image" class="btn btn-default">Choose Category Image</label>
+      <%=f.hidden_field :image, value: @category.cached_image_data , id:"hidden_image"%>
+      <!-- <input type="file" onchange="" style="display:none;"  name="category[image]" id="image_upload"> -->
+      <%=f.file_field :image ,onchange:"readURL(this)" , style:"display:none;"%>
       <div class="thumbnail">         
       <img id="img_prev" src="<%=@category.image_url(:small)%>" alt="your img_prev" class="img-rounded"   />
     </div>

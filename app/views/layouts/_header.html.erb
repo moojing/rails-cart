@@ -75,11 +75,13 @@
                     </a>
                 </div>
             </div>
-
+            
             <!-- navigation -->
+           
             <div class="top-nav s-12 m-12 l-12">
                 <ul class="chevron">
-                    <li>
+                       
+                    <!-- <li>
                         <a href='/products/categories/12' class="hvr-sweep-to-bottom">-新品上架-</a>
                     </li>
                     <li>
@@ -88,73 +90,24 @@
 
                     <li>
                         <a href='/products/categories/12' class="hvr-sweep-to-bottom">-熱賣推薦-</a>
-                    </li>
-
+                    </li> -->
+                   
                     <li>
                         <a href="javascript:void(0)" class="hvr-sweep-to-bottom">-商品分類-</a>
                         <ul>
-                            <!-- <li>
-                                    <a href="index.php?route=product/category" class="hvr-sweep-to-bottom">所有商品</a>
-                                </li> -->
-
+                 
+                            <%categories.each do |category|%>
                             <li>
                                 <a href="/products/categories/64" class="hvr-sweep-to-bottom">
-                                    近期注目 </a>
-
-                                <ul>
+                                    <%=category.name%> </a>
+                                    
+                                <!-- <ul>
                                     <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_60">新品上架</a></li>
                                     <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_74">限時優惠</a></li>
                                     <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_73">熱賣推薦</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
-
-
-                            <li>
-                                <a href="/products/categories/64" class="hvr-sweep-to-bottom">
-                                    全部商品 </a>
-                            </li>
-
-
-                            <li>
-                                <a href="/products/categories/64" class="hvr-sweep-to-bottom">
-                                    化妝刷具 </a>
-
-                                <ul>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_92">套裝組合</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_80">粉底刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_81">遮瑕刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_82">蜜粉刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_83">修容刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_93">鼻影刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_84">腮紅刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_85">打亮刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_87">眼影刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_88">唇刷</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_86">眉刷</a></li>
-                                </ul>
-                            </li>
-
-
-                            <li>
-                                <a href="/products/categories/64" class="hvr-sweep-to-bottom">
-                                    海綿粉撲 </a>
-
-                                <ul>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_90">經典單顆</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_89">套裝組合</a></li>
-                                </ul>
-                            </li>
-
-
-                            <li>
-                                <a href="/products/categories/64" class="hvr-sweep-to-bottom">
-                                    其他工具 </a>
-
-                                <ul>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_91">洗刷墊</a></li>
-                                </ul>
-                            </li>
-
+                            <%end%>
 
                         </ul>
                     </li>

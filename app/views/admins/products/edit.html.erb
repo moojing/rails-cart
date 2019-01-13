@@ -20,7 +20,7 @@
   
   <div class="form-group">
     <label for="stock">stock</label>
-    <input type="text" class="form-control" name="product[stock]" id="stock" >
+    <input type="text" class="form-control" name="product[stock]" id="stock" value="<%=@product.stock.nil? ? '' : @product.stock%>">
   </div>
 
    
