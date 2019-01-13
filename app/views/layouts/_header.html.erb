@@ -98,14 +98,17 @@
                  
                             <%categories.each do |category|%>
                             <li>
-                                <a href="/products/categories/64" class="hvr-sweep-to-bottom">
+                                <a href="/products/categories/<%=category.id%>" class="hvr-sweep-to-bottom">
                                     <%=category.name%> </a>
-                                    
-                                <!-- <ul>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_60">新品上架</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_74">限時優惠</a></li>
-                                    <li><a class="hvr-sweep-to-bottom" href="/products/categories/64_73">熱賣推薦</a></li>
-                                </ul> -->
+                                <%if category.has_child?%>
+                                <ul>
+                                    <%if category.children%>
+                                        <% category.children.each do |child|%>
+                                        <li><a class="hvr-sweep-to-bottom" href="/products/categories/<%=child.id%>"><%=child.name%></a></li>
+                                        <%end%>
+                                    <%end%>
+                                </ul>
+                                <%end%>
                             </li>
                             <%end%>
 

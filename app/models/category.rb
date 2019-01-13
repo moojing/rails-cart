@@ -16,10 +16,19 @@ class Category < ApplicationRecord
     end
 
     def parent 
-        if !self.parent_id.nil?
+        if self.parent_id.present?
         Category.find(self.parent_id)
         else 
             nil
         end
     end 
+    
+    def children
+        children = Category.where(:parent_id=>self.id)
+        if children.exists?
+          return   children
+        else 
+          nil
+        end      
+    end
 end
