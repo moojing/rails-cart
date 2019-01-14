@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_01_12_173246) do
     t.string "stock"
     t.string "sku"
     t.integer "enable"
-    t.integer "discount_value"
+    t.integer "discount_value", default: 0
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -6,7 +6,7 @@
         <div class="line">
             <div class="margin">
                 <div class="fullwidth">
-                    <h1 class="text-center">化妝刷具</h1>
+                    <h1 class="text-center"><%=@category.name%></h1>
 
 
                     <hr class="break-small break-center">
@@ -38,9 +38,9 @@
 
 
                 <!-- product 1 -->
-                <% 8.times do %>
-                <%= render 'products' %>
-                <% end %>
+                
+                <%= render 'products' , products:@products %>
+               
                 <!-- <div class="margin">
                             <div class="fullwidth text-center">
                                 <ul class="pagination pagination_dark">
@@ -51,8 +51,10 @@
                                 </ul>
                             </div>
                         </div> -->
-                <div class="text-center">Paginator</div>
-
+                <!-- <div class="text-center">Paginator</div> -->
+                <div class="text-center">
+                        <%= paginate @products  %>
+                </div>
 
 
             </div>

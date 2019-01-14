@@ -70,7 +70,7 @@ class Admins::ProductsController < Admins::ApplicationController
     end
 
     def product_params
-        params.require(:product).permit(:sku,:name,:content,:price,:stock,:enable,:category_id)
+        params.require(:product).permit(:sku,:name,:content,:price,:stock,:discount_value,:enable,:category_id)
     end
 end
 

@@ -23,6 +23,10 @@
     <input type="text" class="form-control" name="product[stock]" id="stock" value="<%=@product.stock.nil? ? '' : @product.stock%>">
   </div>
 
+  <div class="form-group">
+      <label for="stock">Doscout Value</label>
+      <input type="text" class="form-control" name="product[discount_value]" id="stock"   value="<%=@product.discount_value.nil? ? '' : @product.discount_value%>">
+  </div>
    
   <div class="form-group">
     <label for="category">Category</label>
