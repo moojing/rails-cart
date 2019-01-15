@@ -10,7 +10,8 @@
  
                     <hr class="break-small break-center">
                     <div class="customform right">
-                            
+                            <%last_url = request.original_url.split('?').first%>
+                          
                                 <select id="input-sort" onchange="location = this.value;">
                                     <option value='<%= "#{last_url}"%>' >預設</option>
                                     
