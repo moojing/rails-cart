@@ -14,23 +14,21 @@
                     <div class="s-12 m-4 l-5 margin-bottom">
                         <ul class="thumbnails">
                             <%@product.image.each_with_index do |image,index|%>
-                            <%if index==0 %>
-                            <li>
-                                <img src="<%=image.image_url :original%>" title="<%@product.name%>"
-                                    alt="<%@product.name%>" />
-                            </li>
-                            <%else%>
-                            <li class="image-additional">
-                                <a class="thumbnail" href="/products/<%=@product.name%>"
-                                    title="<%@product.name%>">
+                                <%if index==0 %>
+                                <li>
                                     <img src="<%=image.image_url :original%>" title="<%@product.name%>"
                                         alt="<%@product.name%>" />
-                                </a>
-                            </li>
+                                </li>
+                                <%else%>
+                                <li class="image-additional">
+                                    <a class="thumbnail" href="<%=image.image_url :original%>"
+                                        title="<%@product.name%>">
+                                        <img src="<%=image.image_url :original%>" title="<%@product.name%>"
+                                            alt="<%@product.name%>" />
+                                    </a>
+                                </li>
+                                <%end%>
                             <%end%>
-                            <%end%>
-                           
-                           
                         </ul>
 
                     </div>
@@ -48,21 +46,27 @@
                         <div class="left">
                         </div>
                         <ul class="list-unstyled price">
+                            <%if @product.discount_value.to_i !=0%>
                             <li>
                                 <span class="strike">
                                         TWD$<%=@product.price%> </span>
                             </li>
                             <li>
-                                <h2>
-                                    TWD$<%= @product.price-@product.discount_value%> </h2>
+                                    <h2>TWD$<%= @product.price.to_i-@product.discount_value.to_i%> </h2>
                             </li>
+                            <%else%>
+                            <li>
+                                    <h2>TWD$<%= @product.price.to_i%> </h2>
+                            </li>
+                            <%end%>
+                          
                         </ul>
                         <div></div>
                         <div class="fullwidth margin-bottom-40">
                             <div class="numbers-row">
                                 <label class="control-label" for="input-quantity">
                                     數量 </label>
-                                <input type="text" name="quantity" class="quantity" id="french-hens" value="1">
+                                <input type="text" name="quantity" class="quantity" id="product-quantity" value="1">
                                 <a id="button-cart" class="button right">
                                     加入購物車 </a>
                             </div>
@@ -85,21 +89,7 @@
                             <a class="tab-label active-btn">
                                 商品描述 </a>
                             <div class="tab-content padding-left-10">
-                                <p>
-                                    <p><img src="/image/catalog/BS012N/BS012N-01.jpg" style="width: 100%;"><img src="/image/catalog/BS012N/BS012N/BS012N08/BS012N08-6.JPG"
-                                            style="width: 100%;"><img src="/image/catalog/BS012N/BS012N-02.jpg" style="width: 100%;"></p>
-                                    <h3 style="font-family: &quot;microsoft jhenghei&quot;, &quot;Open Sans&quot;, sans-serif; color: rgb(0, 0, 0); text-align: center;">
-                                        <font face="Helvetica" color="#9c9c94">想知道更詳細的介紹？</font>
-                                    </h3>
-                                    <h3 style="font-family: &quot;microsoft jhenghei&quot;, &quot;Open Sans&quot;, sans-serif; color: rgb(0, 0, 0); text-align: center;">
-                                        <font face="Helvetica" color="#9c9c94">看更多<u><b><a href="index.php?route=newsblog%252Fcategory&amp;category_id=10"
-                                                        style="background-color: rgb(255, 255, 255);">選</a><a href="index.php?route=newsblog%252Fcategory&amp;category_id=10"
-                                                        style="background-color: rgb(255, 255, 255);">購產品攻略</a></b></u></font>
-                                    </h3>
-                                    <h3 style="font-family: &quot;microsoft jhenghei&quot;, &quot;Open Sans&quot;, sans-serif; color: rgb(0, 0, 0); text-align: center;"></h3>
-                                    <h3 style="font-family: &quot;microsoft jhenghei&quot;, &quot;Open Sans&quot;, sans-serif; color: rgb(0, 0, 0); text-align: center;"><br></h3>
-                                    <h3 style="font-family: &quot;microsoft jhenghei&quot;, &quot;Open Sans&quot;, sans-serif; color: rgb(0, 0, 0); text-align: center;"></h3>
-                                </p>
+                               <%=@product.content.html_safe%>
                             </div>
                         </div>
 
@@ -121,8 +111,8 @@
                         <hr class="break-small break-center animated medium">
                     </div>
                     <!-- product 1 -->
-                    <% 8.times do%>
-                    <%= render 'related'%>
+                    <%  @related_products.each do|product|%>
+                    <%= render 'related' , product:product%>
                     <%end%>
                   
                 </div>
@@ -158,37 +148,7 @@
     </div>
 <% content_for :footer_js do %>
     
-    <script type="text/javascript">
-        $("#notice_req").click(function () {
-            $.ajax({
-                url: "https://www.leisurecosmetics.com/index.php?route=product/product/setArrivalNotice",
-                method: "post",
-                data: $("#arrivalnotice_form").serialize(),
-                beforeSend: function () {
-                    $("#notice_req").button("loading");
-                },
-                success: function (response) {
-                    if (response.error) {
-                        $("#arrivalnotice_form [name=email]").siblings("div").remove();
-                        $("#arrivalnotice_form [name=email]").after("<div class='error'>" +
-                            response.error['email'] + "</div>");
-                    } else {
-                        $('#arrivalnotice_req .line').html('<div class="text-center">' + response.message +
-                            '<br><a href="javascript:(0)" class="button margin-top-20 button_2" data-dismiss="modal">確認</a></div>'
-                        );
-                    }
-                    return false;
-
-                },
-                error: function (e) {
-
-                },
-                complete: function () {
-                    $("#notice_req").button("reset");
-                }
-            });
-        });
-    </script>
+   
 
     <script type="text/javascript">
         $(".quantity-btn").on("click", function () {
@@ -212,206 +172,51 @@
         });
     </script>
 
+ 
     <script type="text/javascript">
-        $('select[name=\'recurring_id\'], input[name="quantity"]').change(function () {
-            $.ajax({
-                url: 'index.php?route=product/product/getRecurringDescription',
-                type: 'post',
-                data: $(
-                    'input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'
-                ),
-                dataType: 'json',
-                beforeSend: function () {
-                    $('#recurring-description').html('');
-                },
-                success: function (json) {
-                    $('.alert, .text-danger').remove();
-
-                    if (json['success']) {
-                        $('#recurring-description').html(json['success']);
-                    }
-                }
-            });
-        });
-
-        //-->
-    </script>
-    <script type="text/javascript">
+      
+            const url =location.href.split('/')
+            const product_id = url[url.length-1] 
         $('#button-cart').on('click', function () {
-            $.ajax({
-                url: 'index.php?route=checkout/cart/add',
-                type: 'post',
-                data: $(
-                    '#product input[type=\'number\'],#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'
-                ),
-                dataType: 'json',
-                beforeSend: function () {
-                    $('#button-cart').button('loading');
-                },
-                complete: function () {
-                    $('#button-cart').button('reset');
-                },
-                success: function (json) {
+            const productQuantity = $('#product-quantity').val()
+            let cartData = {product_id,num:productQuantity}
+            let cartList
 
-                    $('.alert, .text-danger').remove();
-                    $('.form-group').removeClass('has-error');
-
-                    if (json['error']) {
-                        if (json['error']['option']) {
-                            for (i in json['error']['option']) {
-                                var element = $('#input-option' + i.replace('_', '-'));
-
-                                if (element.parent().hasClass('input-group')) {
-                                    element.parent().after('<div class="text-danger">' + json[
-                                        'error']['option'][i] + '</div>');
-                                } else {
-                                    element.after('<div class="text-danger">' + json['error'][
-                                        'option'
-                                    ][i] + '</div>');
-                                }
-                            }
-                        }
-
-                        if (json['error']['recurring']) {
-                            $('select[name=\'recurring_id\']').after('<div class="text-danger">' +
-                                json['error']['recurring'] +
-                                '</div>');
-                        }
-
-                        // Highlight any found errors
-                        $('.text-danger').parent().addClass('has-error');
-                    }
-                   
-                    if (json['success']) {
-                        $('.success').after('<div class="alert alert-success">' + json['success'] +
-                            '<button type="button" class="close" data-dismiss="alert">&times;</button></div>'
-                        );
-
-                        $('#cart .cart_number').html(json['total'].substr(0, 1));
-
-                        $('html, body').animate({
-                            scrollTop: 0
-                        }, 'slow');
-
-                        $('#cart > ul').load('index.php?route=common/cart/info ul li');
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $('button[id^=\'button-upload\']').on('click', function () {
-            var node = this;
-
-            $('#form-upload').remove();
-
-            $('body').prepend(
-                '<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>'
-            );
-
-            $('#form-upload input[name=\'file\']').trigger('click');
-
-            if (typeof timer != 'undefined') {
-                clearInterval(timer);
+            if(!getCookie('cartList')){
+                cartList = [cartData]
+            }else{
+                cartList = JSON.parse(getCookie('cartList'))
+                let duplicate_product = findArrById(cartList,product_id) 
+                 if (duplicate_product){
+                    duplicate_product.num = parseInt(duplicate_product.num) + parseInt(productQuantity)
+                    cartList = deleteArrById(cartList,product_id)
+                    cartList.push(duplicate_product)
+                 }else{
+                    cartList.push(cartData)
+                 }
+               
             }
-
-            timer = setInterval(function () {
-                if ($('#form-upload input[name=\'file\']').val() != '') {
-                    clearInterval(timer);
-
-                    $.ajax({
-                        url: 'index.php?route=tool/upload',
-                        type: 'post',
-                        dataType: 'json',
-                        data: new FormData($('#form-upload')[0]),
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        beforeSend: function () {
-                            $(node).button('loading');
-                        },
-                        complete: function () {
-                            $(node).button('reset');
-                        },
-                        success: function (json) {
-                            $('.text-danger').remove();
-
-                            if (json['error']) {
-                                $(node).parent().find('input').after(
-                                    '<div class="text-danger">' + json['error'] +
-                                    '</div>');
-                            }
-
-                            if (json['success']) {
-                                alert(json['success']);
-
-                                $(node).parent().find('input').attr('value', json['code']);
-                            }
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                        }
-                    });
-                }
-            }, 500);
+            setCookie('cartList',JSON.stringify(cartList))
+            
         });
+        function findArrById(arr,id){
+            res = arr.filter(ele=>{
+                return ele.product_id == id
+            })
+            return res[0]
+        }
+        function deleteArrById(arr,id){
+            res = arr.filter(ele=>{
+                return ele.product_id !== id
+            })
+            return res
+        }
 
-
-
-        //-->
+ 
     </script>
+   
     <script type="text/javascript">
-        $('#review').delegate('.pagination a', 'click', function (e) {
-            e.preventDefault();
-
-            $('#review').fadeOut('slow');
-
-            $('#review').load(this.href);
-
-            $('#review').fadeIn('slow');
-        });
-
-        $('#review').load('index.php?route=product/product/review&product_id=67');
-
-        $('#button-review').on('click', function () {
-            $.ajax({
-                url: 'index.php?route=product/product/write&product_id=67',
-                type: 'post',
-                dataType: 'json',
-                data: $("#form-review").serialize(),
-                beforeSend: function () {
-                    $('#button-review').button('loading');
-                },
-                complete: function () {
-                    $('#button-review').button('reset');
-                },
-                success: function (json) {
-                    $('.alert-success, .alert-danger').remove();
-
-                    if (json['error']) {
-                        $('#review').after(
-                            '<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' +
-                            json[
-                                'error'] + '</div>');
-                    }
-
-                    if (json['success']) {
-                        $('#review').after(
-                            '<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' +
-                            json['success'] +
-                            '</div>');
-
-                        $('input[name=\'name\']').val('');
-                        $('textarea[name=\'text\']').val('');
-                        $('input[name=\'rating\']:checked').prop('checked', false);
-                    }
-                }
-            });
-        });
-
+   
         $(document).ready(function () {
             $('.thumbnails').magnificPopup({
                 type: 'image',

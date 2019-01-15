@@ -14,3 +14,25 @@
 //= require activestorage
 //= require_tree .
 //= require toastr
+
+
+
+
+//cookie 
+
+function setCookie(name,value){
+    document.cookie=`${name}=${value}`
+    return getCookie(name)
+}
+function getCookie(name) {
+	var value = "; " + document.cookie;
+	var parts = value.split("; " + name + "=");
+	if (parts.length == 2) return parts.pop().split(";").shift();
+}
+function delCookie(name) { 
+	var exp = new Date(); 
+	exp.setTime(exp.getTime() - 1); 
+	var cval=getCookie(name); 
+	if(cval!=null) 
+		document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
+} 

@@ -50,8 +50,9 @@ class Admins::ProductsController < Admins::ApplicationController
             
             unless  params[:product][:image_id].nil?  
                 images = params[:product][:image_id] 
+                @product.image.clear
                 images.each do |image|
-                    @product.image.clear << Image.find(image)
+                    @product.image << Image.find(image)
                 end
             end
 

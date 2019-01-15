@@ -6,7 +6,6 @@ class Product < ApplicationRecord
     #     include ImageUploader::Attachment.new(:image)     
     # end
     has_many :image
- 
     has_many :product_categories
     has_many :categories, through: :product_categories
     
