@@ -7,33 +7,41 @@
             <div class="margin">
                 <div class="fullwidth">
                     <h1 class="text-center"><%=@category.name%></h1>
-
-
+ 
                     <hr class="break-small break-center">
-                    <!-- <div class="customform right">
+                    <div class="customform right">
+                            
                                 <select id="input-sort" onchange="location = this.value;">
-                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.sort_order&amp;order=ASC"
-                                     selected="selected">預設</option>
-                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=pd.name&amp;order=ASC">名稱（A
-                                        - Z）</option>
-                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=pd.name&amp;order=DESC">名稱（Z
-                                        - A）</option>
-                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.price&amp;order=ASC">價格（低
-                                        &gt; 高）</option>
-                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.price&amp;order=DESC">價格（高
-                                        &gt; 低）</option>
-                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.model&amp;order=ASC">型號（A
-                                        - Z）</option>
-                                    <option value="https://www.leisurecosmetics.com/index.php?route=product/category&amp;path=78&amp;sort=p.model&amp;order=DESC">型號（Z
-                                        - A）</option>
+                                    <option value='<%= "#{last_url}"%>' >預設</option>
+                                    
+                                    <option value='<%= "#{last_url}?order=ASC&sort=price"%>'
+                                            <%= params[:order]=='ASC' && params[:sort]=='price'? 'selected' :'' %>>依照價格(A-Z)</option>
+                                    
+                                    <option value='<%= "#{last_url}?order=ASC&sort=name"%>'
+                                            <%= params[:order]=='ASC' && params[:sort]=='name' ? 'selected' :'' %>>依照名稱（A-Z)</option>
+
+                                    <option value='<%= "#{last_url}?order=ASC&sort=sku"%>'
+                                            <%= params[:order]=='ASC' && params[:sort]=='sku' ? 'selected' :'' %>>依照型號（A-Z)</option>
+
+                                    <option value='<%= "#{last_url}?order=DESC&sort=price"%>'
+                                            <%= params[:order]=='DESC' && params[:sort]=='price' ? 'selected' :'' %> >依照價格(Z-A)</option>
+                                        
+                                    <option value='<%= "#{last_url}?order=DESC&sort=name"%>'
+                                            <%= params[:order]=='DESC' && params[:sort]=='name' ? 'selected' :'' %>>依照名稱（Z-A)</option>
+
+                                    <option value='<%= "#{last_url}?order=DESC&sort=sku"%>'
+                                            <%= params[:order]=='DESC' && params[:sort]=='sku' ? 'selected' :'' %>>依照型號（Z-A)</option>
+                                
+                                
                                 </select>
-                            </div> -->
+                            </div>
                 </div>
             </div>
         </div>
-
+        
         <!-- products -->
         <div class="line">
+     
             <div class="margin productlist">
 
 

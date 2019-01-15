@@ -3,7 +3,11 @@ class ProductsCategoriesController < ApplicationController
 
     def show
         @category = Category.find(params[:id])
-        @products = @category.products.page params[:page]
+        @products = @category.products.order("#{params[:sort]} #{params[:order]}").page params[:page]
+        
+       
     end
+
+    
 
 end

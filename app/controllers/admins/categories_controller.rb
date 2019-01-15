@@ -11,7 +11,6 @@ class Admins::CategoriesController < Admins::ApplicationController
   end
   
   def create
-     
     check_child
     @category = Category.create!(category_params)
 
