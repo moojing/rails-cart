@@ -1,254 +1,275 @@
 <body class="size-1140">
+  <div id="page-main-content">
+    <!-- PRODUCT DETAIL START -->
+    <div class="section section2">
+      <div class="line">
+        <div class="success"></div>
 
-   
-
-    <div id="page-main-content">
-       
-        <!-- PRODUCT DETAIL START -->
-        <div class="section section2">
-
-            <div class="line">
-                <div class="success"></div>
-                <div class="margin" id="product">
-                    <!-- product image -->
-                    <div class="s-12 m-4 l-5 margin-bottom">
-                        <ul class="thumbnails">
-                            <%@product.image.each_with_index do |image,index|%>
-                                <%if index==0 %>
-                                <li>
-                                    <img src="<%=image.image_url :original%>" title="<%@product.name%>"
-                                        alt="<%@product.name%>" />
-                                </li>
-                                <%else%>
-                                <li class="image-additional">
-                                    <a class="thumbnail" href="<%=image.image_url :original%>"
-                                        title="<%@product.name%>">
-                                        <img src="<%=image.image_url :original%>" title="<%@product.name%>"
-                                            alt="<%@product.name%>" />
-                                    </a>
-                                </li>
-                                <%end%>
-                            <%end%>
-                        </ul>
-
-                    </div>
-                    <!-- product detail -->
-                    <div class="s-12 m-8 l-7 padding-l-left">
-                        <h2 class="text-primary">
-                         <%=@product.name%> </h2>
-                        <ul class="condition">
-                            <li>
-                                型號：  <%=@product.sku%> </li>
-                            <li>
-                                庫存狀態： <%=@product.stock.to_i>0?'有現貨':'無庫存'%> </li>
-                        </ul>
-
-                        <div class="left">
-                        </div>
-                        <ul class="list-unstyled price">
-                            <%if @product.discount_value.to_i !=0%>
-                            <li>
-                                <span class="strike">
-                                        TWD$<%=@product.price%> </span>
-                            </li>
-                            <li>
-                                    <h2>TWD$<%= @product.price.to_i-@product.discount_value.to_i%> </h2>
-                            </li>
-                            <%else%>
-                            <li>
-                                    <h2>TWD$<%= @product.price.to_i%> </h2>
-                            </li>
-                            <%end%>
-                          
-                        </ul>
-                        <div></div>
-                        <div class="fullwidth margin-bottom-40">
-                            <div class="numbers-row">
-                                <label class="control-label" for="input-quantity">
-                                    數量 </label>
-                                <input type="text" name="quantity" class="quantity" id="product-quantity" value="1">
-                                <a id="button-cart" class="button right">
-                                    加入購物車 </a>
-                            </div>
-                            <input type="hidden" name="product_id" value="67" />
-                        </div>
-                        <div class="s-12 m-6 l-4"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="alert alert-success fade in" >
+          您已成功新增商品<a href='<%= "/products/#{params[:id]}"%>'><%=@product.name%></a
+          >
+          到您的
+          <a
+            href="/cart"
+            >購物車</a
+          >！<button type="button" class="close" data-dismiss="alert">×</button>
         </div>
-        <!-- PRODUCT DETAIL END -->
 
-        <!-- PRODUCT TAB START -->
-        <div class="section padding-top-0">
-            <div class="line">
-                <div class="fullwidth">
-                    <div class="tabs left">
+        <div class="margin" id="product">
+          <!-- product image -->
+          <div class="s-12 m-4 l-5 margin-bottom">
+            <ul class="thumbnails">
+              <%@product.image.each_with_index do |image,index|%> <%if index==0
+              %>
+              <li>
+                <img
+                  src="<%=image.image_url :original%>"
+                  title="<%=@product.name%>"
+                  alt="<%=@product.name%>"
+                />
+              </li>
+              <%else%>
+              <li class="image-additional">
+                <a
+                  class="thumbnail"
+                  href="<%=image.image_url :original%>"
+                  title="<%=@product.name%>"
+                >
+                  <img
+                    src="<%=image.image_url :original%>"
+                    title="<%=@product.name%>"
+                    alt="<%=@product.name%>"
+                  />
+                </a>
+              </li>
+              <%end%> <%end%>
+            </ul>
+          </div>
+          <!-- product detail -->
+          <div class="s-12 m-8 l-7 padding-l-left">
+            <h2 class="text-primary"><%=@product.name%></h2>
+            <ul class="condition">
+              <li>型號： <%=@product.sku%></li>
+              <li>庫存狀態： <%=@product.stock.to_i>0?'有現貨':'無庫存'%></li>
+            </ul>
 
-                        <div class="tab-item tab-active">
-                            <a class="tab-label active-btn">
-                                商品描述 </a>
-                            <div class="tab-content padding-left-10">
-                               <%=@product.content.html_safe%>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="left"></div>
+            <ul class="list-unstyled price">
+              <%if @product.discount_value.to_i !=0%>
+              <li><span class="strike"> TWD$<%=@product.price%> </span></li>
+              <li>
+                <h2>
+                  TWD$<%= @product.price.to_i-@product.discount_value.to_i%>
+                </h2>
+              </li>
+              <%else%>
+              <li><h2>TWD$<%= @product.price.to_i%></h2></li>
+              <%end%>
+            </ul>
+            <div></div>
+            <div class="fullwidth margin-bottom-40">
+              <div class="numbers-row">
+                <label class="control-label" for="input-quantity"> 數量 </label>
+                <input
+                  type="text"
+                  name="quantity"
+                  class="quantity"
+                  id="product-quantity"
+                  value="1"
+                />
+                <a id="button-cart" class="button right"> 加入購物車 </a>
+              </div>
+              <input type="hidden" name="product_id" value="67" />
             </div>
+            <div class="s-12 m-6 l-4"></div>
+          </div>
         </div>
-        <!-- PRODUCT TAB END -->
+      </div>
+    </div>
+    <!-- PRODUCT DETAIL END -->
 
-        <!-- RELATED PRODUCTS START -->
-        <div class="section padding-top-0">
-            <div class="line">
-                <div class="margin productlist">
-
-
-                    <div class="fullwidth margin-bottom-20">
-                        <h2 class="text-center animated medium">
-                            相關商品 </h2>
-                        <hr class="break-small break-center animated medium">
-                    </div>
-                    <!-- product 1 -->
-                    <%  @related_products.each do|product|%>
-                    <%= render 'related' , product:product%>
-                    <%end%>
-                  
-                </div>
+    <!-- PRODUCT TAB START -->
+    <div class="section padding-top-0">
+      <div class="line">
+        <div class="fullwidth">
+          <div class="tabs left">
+            <div class="tab-item tab-active">
+              <a class="tab-label active-btn"> 商品描述 </a>
+              <div class="tab-content padding-left-10">
+                <%=@product.content.html_safe%>
+              </div>
             </div>
+          </div>
         </div>
-        <!-- RELATED PRODUCTS END -->
+      </div>
+    </div>
+    <!-- PRODUCT TAB END -->
 
-        <!-- FOOTER START -->
-        <button class="totop"><i class="fa fa-angle-up fa-2x"></i></button>
-  
+    <!-- RELATED PRODUCTS START -->
+    <div class="section padding-top-0">
+      <div class="line">
+        <div class="margin productlist">
+          <div class="fullwidth margin-bottom-20">
+            <h2 class="text-center animated medium">相關商品</h2>
+            <hr class="break-small break-center animated medium" />
+          </div>
+          <!-- product 1 -->
+          <% @related_products.each do|product|%> <%= render 'related' ,
+          product:product%> <%end%>
+        </div>
+      </div>
+    </div>
+    <!-- RELATED PRODUCTS END -->
+
+    <!-- FOOTER START -->
+    <button class="totop"><i class="fa fa-angle-up fa-2x"></i></button>
+
     <!-- FOOTER END -->
     <div id="arrivalnotice_req" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content padding border-1">
-                <div class="line">
-                    <h4>貨到通知我</h4>
-                    <hr class="break-small">
-                    <form class="customform" id="arrivalnotice_form">
-                        <div class="margin">
-                            <div class="s-12 m-6 l-7">
-                                <input type="text" name="email" value="" placeholder="請輸入您的Email地址" id="custom_email">
-                            </div>
-                            <div class="s-12 m-6 l-5">
-                                <button type="button" id="notice_req" class="button_2">送出</button>
-                            </div>
-                            <input type="hidden" name="product_id" value="67">
-                        </div>
-                    </form>
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content padding border-1">
+          <div class="line">
+            <h4>貨到通知我</h4>
+            <hr class="break-small" />
+            <form class="customform" id="arrivalnotice_form">
+              <div class="margin">
+                <div class="s-12 m-6 l-7">
+                  <input
+                    type="text"
+                    name="email"
+                    value=""
+                    placeholder="請輸入您的Email地址"
+                    id="custom_email"
+                  />
                 </div>
-            </div>
+                <div class="s-12 m-6 l-5">
+                  <button type="button" id="notice_req" class="button_2">
+                    送出
+                  </button>
+                </div>
+                <input type="hidden" name="product_id" value="67" />
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-<% content_for :footer_js do %>
-    
-   
+    <% content_for :footer_js do %>
 
     <script type="text/javascript">
-        $(".quantity-btn").on("click", function () {
+      $(".quantity-btn").on("click", function() {
+        var $button = $(this),
+          oldValue = $button
+            .parent()
+            .find("input")
+            .val();
 
-            var $button = $(this),
-                oldValue = $button.parent().find("input").val();
+        if ($button.text() === "+") {
+          var newVal = parseFloat(oldValue) + 1;
+        } else {
+          // Do not allow decrementing below zero
+          if (oldValue > 0) {
+            var newVal = parseFloat(oldValue) - 1;
+          } else {
+            newVal = 0;
+          }
+        }
 
-            if ($button.text() === "+") {
-                var newVal = parseFloat(oldValue) + 1;
+        $button
+          .parent()
+          .find("input")
+          .val(newVal);
+      });
+    </script>
+
+    <script type="text/javascript">
+      const url = (location.host + location.pathname).split("/");
+      const product_id = url[url.length - 1];
+      $('.alert-success').hide()
+      $("#button-cart").on("click", function() {
+        $('.alert-success').fadeIn()
+        const productQuantity = $("#product-quantity").val();
+        let cartData = { product_id, num: productQuantity };
+        let cartList;
+
+        if (!getCookie("cartList")) {
+          cartList = [cartData];
+        } else {
+          cartList = JSON.parse(getCookie("cartList"));
+          let duplicate_product = findArrById(cartList, product_id);
+
+          if (duplicate_product) {
+            duplicate_product.num =
+              parseInt(duplicate_product.num) + parseInt(productQuantity);
+            cartList = deleteArrById(cartList, product_id);
+            cartList.push(duplicate_product);
+          } else {
+            cartList.push(cartData);
+          }
+
+        }
+        setCookie("cartList", JSON.stringify(cartList));
+      });
+
+      function findArrById(arr, id) {
+        res = arr.filter(ele => {
+          return ele.product_id == id;
+        });
+        return res[0];
+      }
+
+      function deleteArrById(arr, id) {
+        res = arr.filter(ele => {
+          return ele.product_id !== id;
+        });
+        return res;
+      }
+    </script>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(".thumbnails").magnificPopup({
+          type: "image",
+          delegate: "a",
+          gallery: {
+            enabled: true
+          }
+        });
+        //product quantity
+        $(".numbers-row")
+          .find("input")
+          .before('<div class="inc quantity-btn">+</div>');
+        $(".numbers-row")
+          .find("input")
+          .after('<div class="dec quantity-btn">-</div>');
+
+        $(".quantity-btn").on("click", function() {
+          var $button = $(this),
+            oldValue = $button
+              .parent()
+              .find("input")
+              .val();
+
+          if ($button.text() === "+") {
+            var newVal = parseFloat(oldValue) + 1;
+          } else {
+            // Do not allow decrementing below zero
+            if (oldValue > 0) {
+              var newVal = parseFloat(oldValue) - 1;
             } else {
-                // Do not allow decrementing below zero
-                if (oldValue > 0) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 0;
-                }
+              newVal = 0;
             }
+          }
 
-            $button.parent().find("input").val(newVal);
-
+          $button
+            .parent()
+            .find("input")
+            .val(newVal);
         });
+      });
     </script>
 
- 
-    <script type="text/javascript">
-      
-            const url =location.href.split('/')
-            const product_id = url[url.length-1] 
-        $('#button-cart').on('click', function () {
-            const productQuantity = $('#product-quantity').val()
-            let cartData = {product_id,num:productQuantity}
-            let cartList
-
-            if(!getCookie('cartList')){
-                cartList = [cartData]
-            }else{
-                cartList = JSON.parse(getCookie('cartList'))
-                let duplicate_product = findArrById(cartList,product_id) 
-                 if (duplicate_product){
-                    duplicate_product.num = parseInt(duplicate_product.num) + parseInt(productQuantity)
-                    cartList = deleteArrById(cartList,product_id)
-                    cartList.push(duplicate_product)
-                 }else{
-                    cartList.push(cartData)
-                 }
-               
-            }
-            setCookie('cartList',JSON.stringify(cartList))
-            
-        });
-        function findArrById(arr,id){
-            res = arr.filter(ele=>{
-                return ele.product_id == id
-            })
-            return res[0]
-        }
-        function deleteArrById(arr,id){
-            res = arr.filter(ele=>{
-                return ele.product_id !== id
-            })
-            return res
-        }
-
- 
-    </script>
-   
-    <script type="text/javascript">
-   
-        $(document).ready(function () {
-            $('.thumbnails').magnificPopup({
-                type: 'image',
-                delegate: 'a',
-                gallery: {
-                    enabled: true
-                }
-            });
-            //product quantity
-            $(".numbers-row").find('input').before('<div class="inc quantity-btn">+</div>');
-            $(".numbers-row").find('input').after('<div class="dec quantity-btn">-</div>');
-
-            $(".quantity-btn").on("click", function () {
-
-                var $button = $(this),
-                    oldValue = $button.parent().find("input").val();
-
-                if ($button.text() === "+") {
-                    var newVal = parseFloat(oldValue) + 1;
-                } else {
-                    // Do not allow decrementing below zero
-                    if (oldValue > 0) {
-                        var newVal = parseFloat(oldValue) - 1;
-                    } else {
-                        newVal = 0;
-                    }
-                }
-
-                $button.parent().find("input").val(newVal);
-
-            });
-        });
-    </script>
-
-<% end %>
+    <% end %>
+  </div>
+</body>
