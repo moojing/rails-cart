@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  used: MyString
+  discount: MyString
+  expire_at: MyString
+
+two:
+  used: MyString
+  discount: MyString
+  expire_at: MyString
