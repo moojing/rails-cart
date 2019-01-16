@@ -189,14 +189,16 @@
       $('.alert-success').hide()
       $("#button-cart").on("click", function() {
         $('.alert-success').fadeIn()
+        
         const productQuantity = $("#product-quantity").val();
         let cartData = { product_id, num: productQuantity };
         let cartList;
 
-        if (!getCookie("cartList")) {
+        if (!getCookie("cartList")){
           cartList = [cartData];
+          console.log('cartList',cartList)
         } else {
-          cartList = JSON.parse(getCookie("cartList"));
+          cartList =getCookie("cartList");
           let duplicate_product = findArrById(cartList, product_id);
 
           if (duplicate_product) {
@@ -209,7 +211,9 @@
           }
 
         }
-        setCookie("cartList", JSON.stringify(cartList));
+        console.log('cookie',cartList)
+        setCookie("cartList", cartList);
+        updateCart()
       });
 
       function findArrById(arr, id) {

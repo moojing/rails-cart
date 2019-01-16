@@ -1,21 +1,161 @@
 <div id="page-main-content">
+  <div class="section">
+    <div class="line">
+	<% if @cartList.length >0%>
+      <!-- cart left -->
+      <div class="s-12 m-12 l-8">
+		<%@cartList.each_with_index do |product,index| %>
+        <div class="fullwidth cart-item">
+          <div class="s-12 m-4 l-3">
+            <a href="/products/<%=product['id']%>">
+              <img
+                src=" <%=product['image'][0].image_url :original%>"
+                alt="<%=product['name']%>"
+                title="<%=product['name']%>"
+                class="img-thumbnail"
+            /></a>
+          </div>
+          <div class="s-12 m-8 l-9 cart-item-detail" >
+            <h4><%=product['name']%></h4>
+		        <div  index="<%=index%>">
+              <p >單價: TWD$ <span class="single-price"><%=product['price']%></span>  </p>
+              數量: <i class="to-plus changeQuantity num-btn quantity-btn">+</i>
+              <input
+                type="text"
+                name="quantity[137]"
+                value="<%=product['num']%>"
+                size="1"
+                class="quantity num-inp"
+              />
+              <i class="to-minus changeQuantity num-btn quantity-btn">-</i><br />
+              總價: <span class="text-primary ">TWD$ <span class="product-total">  <%=product['price'].to_i*product['num'].to_i%> </span>
+            </div>
+            <div  index="<%=index%>">
+              <a
+                href="javascript:(0)"
+                class="remove-item"
+                >刪除商品</a>
+            </div>
+          </div>
+        </div>
+
+		<%end%> 
  
-		<div class="section">
-		 
-			<div class="line">
-				<div class="fullwidth margin-bottom-40">
-					<h1 class="text-center text-primary">購物車</h1>
-				</div>
-				<div class="fullwidth">
-					<div class="text-center padding-2x text-dark bordered-2 margin-bottom-40">
-						您的購物車內沒有任何商品！ </div>
-					<div class="text-center">
+  </div>  
+       <!-- cart right -->
+  <div class="s-12 m-12 l-4 margin-m-top-60 padding border-1">
+      <!-- <p class="margin-bottom text-size-16">Order Total:></p> -->
 
-						<a href="/" class="button">繼續</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>	
+      <p class="margin-bottom text-size-16">
+        商品小計: <span class="right">TWD$<span class=" total-price"><%=@total%></span>  </span>
+      </p>
+      <p class="margin-bottom text-size-16">
+        訂單總計: <span class="right">TWD$<span class=" total-price"><%=@total%></span></span>
+      </p>
+      <table class="table table-bordered"></table>
 
-<%=render 'layouts/footer'%>
+      <a
+        href="https://www.leisurecosmetics.com/index.php?route=checkout/checkout"
+        class="button fullwidth"
+        >結帳</a>
+  </div>
+	<%else%>
+        <div class="line">
+          <div class="fullwidth margin-bottom-40">
+            <h1 class="text-center text-primary">購物車</h1>
+          </div>
+          <div class="fullwidth">
+            <div
+              class="text-center padding-2x text-dark bordered-2 margin-bottom-40"
+            >
+              您的購物車內沒有任何商品！
+            </div>
+            <div class="text-center"><a href="/" class="button">繼續</a></div>
+          </div>
+        </div>
+    
+	<%end%>
+    </div>
+  </div>
+</div>
+
+<% content_for :footer_js do %>
+
+<script> 
+let cartList = getCookie('cartList')
+
+Array.prototype.remove= function(index){
+  cartList.splice(index,1)
+}
+
+console.log('cartList',cartList)
+</script>
+
+<script type="text/javascript">
+  
+
+  $(".remove-item").on("click", function() {
+    console.log('remove')
+    let productIndex = $(this).parent().attr('index')
+     $('.cart-item')[productIndex].remove()
+    cartList.remove(productIndex)
+    setCookie('cartList',cartList)
+    countPrice()
+    
+  })
+
+  $(".quantity-btn").on("click", function() {
+    let productIndex = $(this).parent().attr('index')
+        
+    let $button = $(this),
+      oldValue = $button
+        .parent()
+        .find("input")
+        .val();
+    
+    let singlePrice = parseInt(
+       $button
+        .parent()
+        .find(".single-price")
+        .text()
+    );
+    
+    if ($button.text() === "+") {
+      var newVal = parseFloat(oldValue) + 1;
+    } else {
+      // Do not allow decrementing below zero
+      if (oldValue > 0) {
+        var newVal = parseFloat(oldValue) - 1;
+      } else {
+        newVal = 0;
+      }
+    }
+    
+    let productTotal = $button.parent().find('.product-total')
+    productTotal.text(newVal*singlePrice)
+
+    //change Cookie Data
+    cartList[productIndex].num=newVal.toString()
+    //set new Cookie 
+    setCookie('cartList',cartList) 
+
+    $button
+      .parent()
+      .find("input")
+      .val(newVal);
+
+      countPrice()
+    
+  });
+
+  function countPrice(){
+    console.log('countPrice')
+    let totlePrice = 0
+    $('.product-total').each((index,value)=>{
+        totlePrice += parseInt( $(value).text())
+       
+      })
+    $('.total-price').text(totlePrice) 
+  } 
+</script>
+<%end%>

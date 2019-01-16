@@ -21,13 +21,20 @@
 //cookie 
 
 function setCookie(name,value){
-    document.cookie=`${name}=${value}`
+	value = encodeURIComponent(JSON.stringify(value).replaceAll(' ','+'))
+    document.cookie=`${name}=${value}; path=/;`
     return getCookie(name)
 }
 function getCookie(name) {
 	var value = "; " + document.cookie;
 	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) return parts.pop().split(";").shift();
+	let res
+	if (parts.length == 2){
+		res= parts.pop().split(";").shift(); 
+		return JSON.parse(decodeURIComponent(res).replaceAll('+',' '))
+	}else{
+		return undefined
+	}
 }
 function delCookie(name) { 
 	var exp = new Date(); 
@@ -36,3 +43,8 @@ function delCookie(name) {
 	if(cval!=null) 
 		document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
 } 
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.split(search).join(replacement);
+};

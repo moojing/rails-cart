@@ -39,4 +39,18 @@
     <%= render 'layouts/footer'%>
 
   </body>
+  <script> 
+    function updateCart(){
+      let cartNum = 0
+       
+      if(getCookie('cartList')){ 
+        cartNum = getCookie('cartList').length
+      }
+    
+      $('.cart_number').text(cartNum)
+    }
+    window.onload = ()=>{
+      updateCart()
+    }
+ </script>
 </html>
