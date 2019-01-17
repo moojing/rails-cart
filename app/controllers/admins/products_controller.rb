@@ -70,6 +70,8 @@ class Admins::ProductsController < Admins::ApplicationController
         redirect_to admins_products_path 
     end
 
+    private
+    
     def product_params
         params.require(:product).permit(:sku,:name,:content,:price,:stock,:discount_value,:enable,:category_id)
     end

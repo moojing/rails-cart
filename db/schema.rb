@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_16_151357) do
+ActiveRecord::Schema.define(version: 2019_01_16_174221) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,11 +42,13 @@ ActiveRecord::Schema.define(version: 2019_01_16_151357) do
   end
 
   create_table "coupons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "used"
+    t.integer "used"
     t.string "discount"
-    t.string "expire_at"
+    t.datetime "expire_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "code", limit: 255, null: false
+    t.integer "remain", default: 0
   end
 
   create_table "deliveries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -19,6 +19,8 @@
           <!-- product image -->
           <div class="s-12 m-4 l-5 margin-bottom">
             <ul class="thumbnails">
+            <%if @product.image[0]%>
+            <%= @product.image[0]%>
               <%@product.image.each_with_index do |image,index|%> <%if index==0
               %>
               <li>
@@ -43,7 +45,17 @@
                 </a>
               </li>
               <%end%> <%end%>
+            <%else%>
+               <li>
+                <img
+                  src="/default-product.png"
+                />
+              </li>
+            <%end%>
             </ul>
+            
+
+            
           </div>
           <!-- product detail -->
           <div class="s-12 m-8 l-7 padding-l-left">

@@ -3,9 +3,15 @@
         <div class="margin">
             <div class="fullwidth">
                 <figure class="imghvr-reveal-down">
-                    <%if product.image[0]%>
-                    <img src="/uploads/<%=product.image[0].image[:original].id%>">
-                    <%end%>
+                   
+                    <object data="/default-product.png" type="image/png"   width=100%>
+                        <%if product.image[0]%>
+                        <img src="/uploads/<%=product.image[0].image[:original].id%>" >
+                        <%else%>
+                        <img src="just_want_to_trigger_error." alt="">
+                        <%end%>
+                    </object>
+                   
                     <figcaption>
                         <div class="product-hover-content">
                             <div class="btn-box">

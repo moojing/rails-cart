@@ -2,7 +2,7 @@
 
 class Admins::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  before_action :check_if_user , only: [:new]
+ 
   
   # GET /resource/sign_in
   # def new
@@ -33,7 +33,8 @@ class Admins::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(resource)
-    signed_in_root_path(resource) || root_path
+    # signed_in_root_path(resource) || root_path
+    '/admins/products'
   end
 
   def after_sign_out_path_for(resource)

@@ -2,8 +2,12 @@
         <div class="margin">
             <div class="fullwidth">
                 <figure class="imghvr-reveal-down">
+                    <%if product.image[0]%>
                     <img src="<%=product.image[0].image_url(:small)%>" alt="<%= product.name%>"
                         title="<%= product.name%>" class="img-responsive" />
+                    <%else%>
+                     <img src="/default-product.png" alt="">
+                    <%end%>
                     <figcaption>
                         <div class="product-hover-content">
                             <div class="btn-box">

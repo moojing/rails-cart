@@ -8,12 +8,16 @@
         <div class="fullwidth cart-item">
           <div class="s-12 m-4 l-3">
             <a href="/products/<%=product['id']%>">
+              <%if product['image'][0]%>
               <img
                 src=" <%=product['image'][0].image_url :original%>"
                 alt="<%=product['name']%>"
                 title="<%=product['name']%>"
-                class="img-thumbnail"
-            /></a>
+                class="img-thumbnail"/>
+              <%else%>
+              <img src="/default-product.png" alt="">
+              <%end%>
+              </a>
           </div>
           <div class="s-12 m-8 l-9 cart-item-detail" >
             <h4><%=product['name']%></h4>

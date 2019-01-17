@@ -1,2 +1,46 @@
-<h1>Admins::Coupons#edit</h1>
-<p>Find me in app/views/admins/coupons/edit.html.erb</p>
+<%=form_for [:admins,@coupon] do |f|%>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="form-group">
+      <%=f.label :code , 'Coupon Code' %>
+       <%=f.text_field :code , class:"form-control"%>
+    </div>
+    <div class="form-group">
+            <%=f.label :discount , 'Discount Value' %> 
+            <%=f.text_field :discount , class: "form-control"%>
+    </div>
+    
+    <div class="form-group">
+            <%=f.label :remain , 'Remain Coupons' %> 
+            <%=f.text_field :remain , class: "form-control"%>
+    </div>
+ 
+    <input type="hidden" value="<%=@coupon.expire_at%>" id="expire_default">
+    <label for="">Expire_at</label>
+    <div class="input-group date" id="datetimepicker2">
+    
+      <input type="text" class="form-control" name="coupon[expire_at]" id="expire_at" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+
+
+    <div class=" text-right">
+            <%=f.submit 'Submit', class: 'btn btn-primary'%>
+    </div>
+  </div>
+</div>
+
+<%end%> <%content_for :js do%>
+<script>
+  $(function() {
+    $("#datetimepicker2").datetimepicker({
+      locale: "zh",
+      defaultDate:new Date($('#expire_default').val())
+    });
+ 
+  });
+</script>
+<%end%>

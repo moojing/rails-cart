@@ -1,2 +1,35 @@
-<h1>Admins::Coupons#index</h1>
-<p>Find me in app/views/admins/coupons/index.html.erb</p>
+<div class="x_content">
+        <div class="row "> 
+                <div class="col-md-1 col-md-offset-10">  <%= link_to 'Create Coupon', new_admins_coupon_path ,class:'btn btn-primary' %></div>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Code</th>
+              <th>Discount Value</th>
+              <th>Remain</th>
+              <th>Expire_at</th>
+             
+              <th class="text-center">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @coupons.each do |coupon|%>
+            <tr>
+              <th scope="row"><%= coupon.id%></th>
+              <td><%= coupon.code%></td>
+              <td><%= coupon.discount%></td>
+              <td><%=coupon.remain%></td>
+              <td><%= coupon.expire_at%></td>
+
+              <td class="text-right"><%= link_to 'Edit', edit_admins_coupon_path(coupon.id) ,class:'btn btn-primary' %> 
+                <%= link_to 'Delete', admins_coupon_path(coupon.id), method: :delete ,class:'btn btn-danger' , data: { confirm: 'Are you certain you want to delete this?' } %></td>
+               
+            </tr>
+            <% end %>
+          
+          </tbody>
+        </table>
+
+      </div>

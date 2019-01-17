@@ -20,6 +20,8 @@
     <link href="/dashboard/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- jQuery custom content scroller -->
     <link href="/dashboard/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+    <!-- datetime picker -->
+    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <%= javascript_include_tag "admins/application" %>
     <%= stylesheet_link_tag  "admins/application"  %>
     <!-- Custom Theme Style -->
@@ -72,7 +74,7 @@
   
                 <ul class="nav navbar-nav navbar-right">
                   <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript:(0);" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                       <img src="images/img.jpg" alt="">
                       <%- if current_admin%>
                         <%= current_admin.email.split('@')[0]%>
@@ -98,6 +100,21 @@
           <div class="right_col" role="main">
            
               <div class="page-content" style="margin-top:70px">
+                 
+                <% flash.each do |type, message| %>
+                <div class="alert <%= bootstrap_class_for_flash(type) %> fade in text-white" >
+                  <button class="close" data-dismiss="alert">×</button>
+                  
+                  <% if message.is_a?(Hash)%>
+                    <% message.each do |key, value|%> 
+                      <%= "#{key} #{value[0]}" %>
+                    <%end%>
+                  <%else%>
+                    <%= message %>
+                  <%end%>
+                </div>
+                <% end %> 
+
                 <%= yield %>
               </div>
           
@@ -119,8 +136,7 @@
   
     <!-- jQuery -->
     <script src="/dashboard/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="/dashboard/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+ 
 
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
@@ -130,6 +146,9 @@
     <script src="/dashboard/vendors/nprogress/nprogress.js"></script>
     <!-- jQuery custom content scroller -->
     <script src="/dashboard/vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- datetime picker -->
+    <script type="text/javascript" src="/bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="/dashboard/build/js/custom.min.js"></script>  

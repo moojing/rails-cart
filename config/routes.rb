@@ -1,26 +1,11 @@
 Rails.application.routes.draw do
    
-  namespace :admins do
-    get 'coupons/index'
-    get 'coupons/update'
-    get 'coupons/edit'
-    get 'coupons/show'
-    get 'coupons/new'
-    get 'coupons/create'
-    get 'coupons/destroy'
-  end
-  namespace :admins do
-    get 'coupons/index'
-    get 'coupons/update'
-    get 'coupons/edit'
-    get 'coupons/show'
-    get 'coupons/new'
-    get 'coupons/create'
-  end
+ 
   namespace :admins do
     resources 'users'
     resources 'products'
     resources 'categories'
+    resources 'coupons'
   end
   root :to => 'pages#home'
 
