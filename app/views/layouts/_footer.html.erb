@@ -103,7 +103,7 @@
     <script type="text/javascript" src="/catalog/view/javascript/jquery/owl-carousel/owl.carousel.js"></script>
     <script type="text/javascript" src="/catalog/view/js/address.js"></script>
     <script type="text/javascript" src="/catalog/view/javascript/common.js"></script>
-
+    <script src="/bower_components/tw-city-selector/dist/tw-city-selector.js"></script>
     <script type="text/javascript" src="/catalog/view/javascript/custom.js"></script>
     <%= javascript_include_tag :application %> 
     <script>
@@ -111,9 +111,16 @@
             for (var i in initializeFunctions) {
                 initializeFunctions[i]();
             }
+            
         }
+        new TwCitySelector({
+            el: '.city-selector-set',
+            elCounty: '.county', // 在 el 裡查找 element
+            elDistrict: '.district', // 在 el 裡查找 element
+            elZipcode: '.zipcode', // 在 el 裡查找 element
+            hasZipcode: true
+        });
     </script>
-    
     <script>
         function validate(e) {
             var error = $('.errorwrap');

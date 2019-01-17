@@ -1,56 +1,83 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    
+    <%= csrf_meta_tags %> <%= csp_meta_tag %>
+
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Yes  | 雅詩美妝店  	</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Yes | 雅詩美妝店</title>
     <base href="" />
     <meta name="description" content="Yes | 雅詩美妝店" />
     <meta name="keywords" content="Yes | 雅詩美妝店" />
 
-    <link rel="icon" type="img/ico" href="catalog/view/images/favor.png">
-  
+    <link rel="icon" type="img/ico" href="catalog/view/images/favor.png" />
+
     <!-- css Files -->
-    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" type="text/css" />
-    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/stylesheet.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="/catalog/view/javascript/bootstrap/css/bootstrap.min.css" media="screen" />
-    <link rel="stylesheet" href="/catalog/view/javascript/jquery/magnific/magnific-popup.css" media="screen" />
-    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/myresponsee.css">
-    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/style.css">
-    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/responsive.css">
-    <link rel="stylesheet" href="/catalog/view/theme/default/stylesheet/custom.css">
-    <%= stylesheet_link_tag  :application  %>
-    
+    <link
+      rel="stylesheet"
+      href="/catalog/view/theme/default/stylesheet/jquery-ui.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="/catalog/view/theme/default/stylesheet/stylesheet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/catalog/view/javascript/bootstrap/css/bootstrap.min.css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      href="/catalog/view/javascript/jquery/magnific/magnific-popup.css"
+      media="screen"
+    />
+    <link
+      rel="stylesheet"
+      href="/catalog/view/theme/default/stylesheet/myresponsee.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/catalog/view/theme/default/stylesheet/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/catalog/view/theme/default/stylesheet/responsive.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/catalog/view/theme/default/stylesheet/custom.css"
+    />
+    <%= stylesheet_link_tag :application %>
   </head>
   <script>
-		var initializeFunctions = []; 
-	</script>
-  <body  class="size-1140">
-    <%=render "layouts/header" %>
-  
-    <%= yield %>
-      
-    <%= render 'layouts/footer'%>
-
+    var initializeFunctions = [];
+  </script>
+  <body class="size-1140">
+    <%=render "layouts/header" %> <%= yield %> <%= render 'layouts/footer'%>
   </body>
-  <script> 
-    function updateCart(){
-      let cartNum = 0
-       
-      if(getCookie('cartList')){ 
-        cartNum = getCookie('cartList').length
+  <script>
+    function updateCart() {
+      let cartNum = 0;
+
+      if (getCookie("cartList")) {
+        cartNum = getCookie("cartList").length;
       }
-    
-      $('.cart_number').text(cartNum)
+
+      $(".cart_number").text(cartNum);
     }
-    window.onload = ()=>{
-      updateCart()
-    }
- </script>
+    window.onload = () => {
+      updateCart();
+    };
+  </script>
+  <script src="/bower_components/tw-city-selector/dist/tw-city-selector.min.js"></script>
 </html>
