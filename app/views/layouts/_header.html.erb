@@ -1,87 +1,74 @@
 <!-- HEADER START -->
 <header>
-    <!-- top bar start -->
-    <div id="topbar-primary" class="background-primary">
-        <div class="line">
-            <!-- social icons -->
-            <div class="hide-s hide-m l-6">
-                <ul>
-                    <li>
-                        <a href="https://www.cakeresume.com/tsai-mujing" target="_blank">
-                            <i class="fa fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.cakeresume.com/tsai-mujing" target="_blank">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.cakeresume.com/tsai-mujing">
-                            <i class="fab fa-line"></i>
-                        </a>
-                    </li>
+  <!-- top bar start -->
+  <div id="topbar-primary" class="background-primary">
+    <div class="line">
+      <!-- social icons -->
+      <div class="hide-s hide-m l-6">
+        <ul>
+          <li>
+            <a href="https://www.cakeresume.com/tsai-mujing" target="_blank">
+              <i class="fa fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.cakeresume.com/tsai-mujing" target="_blank">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.cakeresume.com/tsai-mujing">
+              <i class="fab fa-line"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- contact details -->
+      <div class="l-6 m-12 s-12">
+        <div class="right">
+          <ul class="topbar-menu">
+            <!-- <li><a href="#">info@website.com</a></li> -->
+            <!-- <li><a href="#">123456789</a></li> -->
 
-
-
-                </ul>
-            </div>
-            <!-- contact details -->
-            <div class="l-6 m-12 s-12">
-                <div class="right">
-                    <ul class="topbar-menu">
-                        <!-- <li><a href="#">info@website.com</a></li> -->
-                        <!-- <li><a href="#">123456789</a></li> -->
-
-
-
-
-                        <li>
-                            <a href="/users/edit" title="會員中心">
-                                <i class="fa fa-user"></i>
-                                <span class="hidden-xs hidden-sm hidden-md">
-                                    會員中心 </span>
-                            </a>
-                        </li>
-                        <!-- <li><a href="https://www.leisurecosmetics.com/index.php?route=account/wishlist" id="wishlist-total" title="收藏清單（0）"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">收藏清單（0）</span></a></li> -->
-                        <li>
-                            <a href="/cart" title="購物車" id="cart">
- 
-                                <i class="fa fa-shopping-cart"></i>
-                                <span class="hidden-xs hidden-sm hidden-md">
-                                    購物車
-                                </span>
-                                <span class="cart_number">0</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
+            <li>
+              <a href="/users/edit" title="會員中心">
+                <i class="fa fa-user"></i>
+                <span class="hidden-xs hidden-sm hidden-md"> 會員中心 </span>
+              </a>
+            </li>
+            <!-- <li><a href="https://www.leisurecosmetics.com/index.php?route=account/wishlist" id="wishlist-total" title="收藏清單（0）"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">收藏清單（0）</span></a></li> -->
+            <li>
+              <a href="/cart" title="購物車" id="cart">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="hidden-xs hidden-sm hidden-md"> 購物車 </span>
+                <span class="cart_number">0</span>
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
-    <!-- top bar end -->
+  </div>
+  <!-- top bar end -->
 
-    <!-- navigation and logo -->
-    <nav class="nav">
-        <div class="line">
-            <!-- logo -->
-            <div class="s-12 l-12">
-                <div class="fullwidth">
+  <!-- navigation and logo -->
+  <nav class="nav">
+    <div class="line">
+      <!-- logo -->
+      <div class="s-12 l-12">
+        <div class="fullwidth">
+          <a class="nav-text"></a>
+          <a href="/" class="logo">
+            <img src="/catalog/view/images/logo.png" alt="" />
+          </a>
+        </div>
+      </div>
 
-                    <a class="nav-text"></a>
-                    <a href="/" class="logo">
-                        <img src="/catalog/view/images/logo.png" alt="">
-                    </a>
-                </div>
-            </div>
-            
-            <!-- navigation -->
-           
-            <div class="top-nav s-12 m-12 l-12">
-                <ul class="chevron">
-                       
-                    <!-- <li>
+      <!-- navigation -->
+
+      <div class="top-nav s-12 m-12 l-12">
+        <ul class="chevron">
+          <!-- <li>
                         <a href='/products/categories/12' class="hvr-sweep-to-bottom">-新品上架-</a>
                     </li>
                     <li>
@@ -91,61 +78,86 @@
                     <li>
                         <a href='/products/categories/12' class="hvr-sweep-to-bottom">-熱賣推薦-</a>
                     </li> -->
-                   
-                    <li>
-                        <a href="javascript:void(0)" class="hvr-sweep-to-bottom">-商品分類-</a>
-                        <ul>
-                 
-                            <%categories.each do |category|%>
-                            <li>
-                                <a href="/products/categories/<%=category.id%>" class="hvr-sweep-to-bottom">
-                                    <%=category.name%> </a>
-                                <%if category.has_child?%>
-                                <ul>
-                                    <%if category.children%>
-                                        <% category.children.each do |child|%>
-                                        <li><a class="hvr-sweep-to-bottom" href="/products/categories/<%=child.id%>"><%=child.name%></a></li>
-                                        <%end%>
-                                    <%end%>
-                                </ul>
-                                <%end%>
-                            </li>
-                            <%end%>
 
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript:void(0)" class="hvr-sweep-to-bottom">-關於商店-</a>
-                        <ul>
-                            <li>
-                                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
-                                    最新消息 </a>
-
-                            </li>
-                            <li>
-                                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
-                                    選購攻略 </a>
-
-                            </li>
-                            <li>
-                                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
-                                    常見問題 </a>
-
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href='#footercontact' class="hvr-sweep-to-bottom">-聯絡我們-</a>
-                    </li>
-
-
+          <li>
+            <a href="javascript:void(0)" class="hvr-sweep-to-bottom"
+              >-商品分類-</a
+            >
+            <ul>
+              <%categories.each do |category|%>
+              <li>
+                <a
+                  href="/products/categories/<%=category.id%>"
+                  class="hvr-sweep-to-bottom"
+                >
+                  <%=category.name%>
+                </a>
+                <%if category.has_child?%>
+                <ul>
+                  <%if category.children%> <% category.children.each do
+                  |child|%>
+                  <li>
+                    <a
+                      class="hvr-sweep-to-bottom"
+                      href="/products/categories/<%=child.id%>"
+                      ><%=child.name%></a
+                    >
+                  </li>
+                  <%end%> <%end%>
                 </ul>
-            </div>
+                <%end%>
+              </li>
+              <%end%>
+            </ul>
+          </li>
 
-        </div>
-    </nav>
+          <li>
+            <a href="javascript:void(0)" class="hvr-sweep-to-bottom"
+              >-關於商店-</a
+            >
+            <ul>
+              <li>
+                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
+                  最新消息
+                </a>
+              </li>
+              <li>
+                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
+                  選購攻略
+                </a>
+              </li>
+              <li>
+                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
+                  常見問題
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="#footercontact" class="hvr-sweep-to-bottom">-聯絡我們-</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
+<!-- <ul class="breadcrumb">
+  <li>
+    <a href="https://www.leisurecosmetics.com/index.php?route=common/home"
+      ><i class="fa fa-home"></i
+    ></a>
+  </li>
+  <li>
+    <a href="https://www.leisurecosmetics.com/index.php?route=checkout/cart"
+      >購物車</a
+    >
+  </li>
+  <li>
+    <a href="https://www.leisurecosmetics.com/index.php?route=checkout/checkout"
+      >結帳</a
+    >
+  </li>
+</ul> -->
 
 <!-- HEADER END -->
