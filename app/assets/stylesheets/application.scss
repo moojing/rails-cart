@@ -13,13 +13,16 @@
  *= require_tree .
  *= require_self
  */
- @import "toastr";
- @import "summernote-custom-theme.min";
+@import "toastr";
+@import "summernote-custom-theme.min";
 
- #toast-container div{
-    width: 600px;
+#toast-container div {
+  width: 600px;
 }
-.toast-info{
-    background-color: #303030;
-    color:white
+#toast-container div.toast-success {
+  width: 100%;
+}
+.toast-info {
+  background-color: #303030;
+  color: white;
 }

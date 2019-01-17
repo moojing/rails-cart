@@ -113,19 +113,24 @@
                         type="radio"
                         name="order[delivery]"
                         value="ecpaylogistic"
-                      />ECPay 超商取貨付款 ECPay 超商取貨付款
+                      />超商取貨付款
                     </label>
                   </div>
                   <div class="radio">
                     <label>
-                      <input type="radio" name="order[delivery]" value="flat" />
+                      <input
+                        type="radio"
+                        name="order[delivery]"
+                        value="flat"
+                        checked
+                      />
                       郵寄/宅配
                     </label>
                   </div>
                 </div>
 
                 <div class="ecpaylogistic-control-area s-12 m-12 l-12">
-                  <div id="ecpaylogistic-store-info">
+                  <div id="ecpaylogistic-store-info" style="display:none;">
                     <div class="customform store-info">
                       <h4>收件門市</h4>
 
@@ -172,6 +177,9 @@
                     placeholder="折價券代碼"
                     id="input-coupon"
                   />
+                  <span id="coupon-error" style="   color: red;display : none;"
+                    >Coupon is not exists!!</span
+                  >
                 </div>
                 <div class="s-12 m-6 l-5">
                   <a class="button" href="javascript:(0)" id="button-coupon">
@@ -224,9 +232,13 @@
                   </span>
                 </p>
               </div>
-              <template id="total-row">
+              <div id="discount-row"></div>
+              <template id="discount-content">
                 <p class="margin-bottom text-size-16">
-                  {{ title }}: <span class="right">{{ text }}</span>
+                  <span>折扣碼優惠</span>:
+                  <span class="right">
+                    TWD$<span class=" total-price">{{ discount }}</span>
+                  </span>
                 </p>
               </template>
               <button type="submit" class="btn-style">確認</button>
@@ -240,7 +252,49 @@
 
 <%content_for :footer_js do %>
 
-<script></script>
+<script>
+  $("#checkout-form").keydown(function(event) {
+    if (event.keyCode == 13) {
+      event.preventDefault(); //prevent Enter
+    }
+  });
+  $("#button-coupon").on("click", function() {
+    let coupon_code = $("#input-coupon");
+    $.ajax({
+      type: "POST",
+      url: `/coupons/check`,
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader(
+          "X-CSRF-Token",
+          $('meta[name="csrf-token"]').attr("content")
+        );
+      },
+      data: { code: coupon_code.val() },
+      success: function(res) {
+        console.log("res", res);
+        let discount_template = $("#discount-content").html();
+        let replaced_row = discount_template.replace(
+          "{{ discount }}",
+          res.discount
+        );
+        console.log("replaced_row", replaced_row);
+
+        if (res.success == "true") {
+          toastr.options = {
+            positionClass: "toast-top-left",
+            timeOut: 5000
+          };
+          $("#discount-row").html(replaced_row);
+          $("#coupon-error").hide();
+          toastr.success("Coupon has already  been applied", "Success!");
+        } else {
+          console.log("falied");
+          $("#coupon-error").show();
+        }
+      }
+    });
+  });
+</script>
 
 <script type="text/javascript">
   let delivery = $("[name='order[delivery]']");

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
    
-
+ 
   namespace :admins do
     resources 'users'
     resources 'products'
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
      
     get 'orders/new'
     post 'orders/create' ,:to=> 'orders#create'
- 
+    post 'coupons/check', :to => 'coupons#check'
 
     post '/upload' , :to=> 'upload#create'
     get '/upload/products/:id' , :to=> 'upload#show'

@@ -147,7 +147,7 @@
                     data[serial.name] = serial.value
                 })
                 $.post('/contacts',{contact:data},function(data){
-                    toastr.info(data.message, 'Thank you!!', {timeOut: 5000})
+                    toastr.info(data.message, 'Thank you!!', {timeOut: 5000, positionClass: "toast-top-right"})
                     $("#footer-form")[0].reset()
                 })
             } 
