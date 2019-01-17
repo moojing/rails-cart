@@ -15,7 +15,7 @@ class CartController < ApplicationController
             
         else
         
-        @cartList = cookies[:cartList]
+        @cartList =  []
         
         end
  

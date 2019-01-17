@@ -4,7 +4,7 @@
     <form
       id="checkout-form"
       method="post"
-      action="https://www.leisurecosmetics.com/index.php?route=checkout/checkout"
+      action="/order"
       class="customform payform"
     >
       <div id="content" class="line">
@@ -185,17 +185,25 @@
             <div class="line">
               <h4>訂單內容</h4>
               <hr class="break-small" />
+              <% @cartList.each do |product|%> <% product =
+              HashWithIndifferentAccess.new(product)%>
               <div class="margin-bottom text-size-16">
-                <a
-                  href="https://www.leisurecosmetics.com/index.php?route=product/product&amp;product_id=75"
-                >
-                  BS06 新手入門 - 初級化妝刷具套裝
-                </a>
+                <a href="/product/<%=product[:id]%>"> <%=product[:name]%> </a>
                 <p class="line">
-                  <span class="left"> 1 x TWD$910 </span>
-                  <span class="right"> <span>小計:</span> TWD$910 </span>
+                  <span class="left">
+                    <span><%=product[:num]%></span> x TWD$<span
+                      class="single-price"
+                    >
+                      <%=product[:price]%>
+                    </span>
+                  </span>
+                  <span class="right">
+                    <span>小計:</span> TWD$
+                    <span> <%= product[:product_total_price]%></span>
+                  </span>
                 </p>
               </div>
+              <%end%>
             </div>
           </div>
           <div class="margin-bottom-30 padding border-1">
@@ -204,10 +212,16 @@
               <hr class="break-small" />
               <div id="total-table">
                 <p class="margin-bottom text-size-16">
-                  商品小計: <span class="right"> TWD$910 </span>
+                  商品小計:
+                  <span class="right">
+                    TWD$<span class=" total-price"> <%=@total%></span>
+                  </span>
                 </p>
                 <p class="margin-bottom text-size-16">
-                  訂單總計: <span class="right"> TWD$910 </span>
+                  訂單總計:
+                  <span class="right">
+                    TWD$<span class=" total-price"> <%=@total%></span>
+                  </span>
                 </p>
               </div>
               <template id="total-row">
@@ -225,6 +239,9 @@
 </div>
 
 <%content_for :footer_js do %>
+
+<script></script>
+
 <script type="text/javascript">
   let delivery = $("[name='order[delivery]']");
   let store = $("#ecpaylogistic-store-info");
