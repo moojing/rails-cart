@@ -4,9 +4,10 @@
     <form
       id="checkout-form"
       method="post"
-      action="/order"
+      action="/orders"
       class="customform payform"
     >
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <div id="content" class="line">
         <h1 class="text-center">結帳</h1>
 
@@ -106,13 +107,17 @@
               <hr class="break-small" />
               <div class="fullwidth">
                 <p>請選擇一個運送方式。</p>
+
+                <input type="hidden" name="delivery[price]" value="" />
+
                 <div class="s-12 m-6 l-6">
                   <div class="radio">
                     <label>
                       <input
                         type="radio"
-                        name="order[delivery]"
+                        name="delivery[kind]"
                         value="ecpaylogistic"
+                        delivery-price="100"
                       />超商取貨付款
                     </label>
                   </div>
@@ -120,9 +125,10 @@
                     <label>
                       <input
                         type="radio"
-                        name="order[delivery]"
+                        name="delivery[kind]"
                         value="flat"
                         checked
+                        delivery-price="60"
                       />
                       郵寄/宅配
                     </label>
@@ -172,7 +178,7 @@
                 <div class="s-12 m-6 l-7">
                   <input
                     type="text"
-                    name="coupon"
+                    name="order[coupon]"
                     value=""
                     placeholder="折價券代碼"
                     id="input-coupon"
@@ -222,25 +228,45 @@
                 <p class="margin-bottom text-size-16">
                   商品小計:
                   <span class="right">
-                    TWD$<span class=" total-price"> <%=@total%></span>
+                    TWD$<span class="total-price" id="total-price">
+                      <%=@total%></span
+                    >
                   </span>
                 </p>
+                <div id="discount-row"></div>
+                <div id="delivery-row"></div>
                 <p class="margin-bottom text-size-16">
                   訂單總計:
                   <span class="right">
-                    TWD$<span class=" total-price"> <%=@total%></span>
+                    TWD$<span class="final-price" id="final-price">
+                      <%=@total%></span
+                    >
                   </span>
                 </p>
               </div>
-              <div id="discount-row"></div>
+
               <template id="discount-content">
                 <p class="margin-bottom text-size-16">
                   <span>折扣碼優惠</span>:
                   <span class="right">
-                    TWD$<span class=" total-price">{{ discount }}</span>
+                    -TWD$<span class="discount-price" id="discount-price">
+                      {{ discount }}
+                    </span>
                   </span>
                 </p>
               </template>
+
+              <template id="delivery-content">
+                <p class="margin-bottom text-size-16">
+                  <span>運費</span>:
+                  <span class="right">
+                    TWD$<span class="delivery-price" id="delivery-price">
+                      {{ delivery }}
+                    </span>
+                  </span>
+                </p>
+              </template>
+
               <button type="submit" class="btn-style">確認</button>
             </div>
           </div>
@@ -251,7 +277,28 @@
 </div>
 
 <%content_for :footer_js do %>
+<script>
+  function setUpDelivery() {
+    let deliveryPriceField = $('[name="delivery[price]"]');
+    let deliveryPrice = $('input[name="delivery[kind]"]:checked').attr(
+      "delivery-price"
+    );
+    deliveryPriceField.val(deliveryPrice);
 
+    let deliveryTemplate = $("#delivery-content").html();
+    let replaced_template = deliveryTemplate.replace(
+      "{{ delivery }}",
+      deliveryPrice
+    );
+    $("#delivery-row").html(replaced_template);
+  }
+
+  setUpDelivery();
+
+  $('input[name="delivery[kind]"]').on("change", function(e) {
+    setUpDelivery();
+  });
+</script>
 <script>
   $("#checkout-form").keydown(function(event) {
     if (event.keyCode == 13) {
@@ -271,25 +318,30 @@
       },
       data: { code: coupon_code.val() },
       success: function(res) {
-        console.log("res", res);
         let discount_template = $("#discount-content").html();
-        let replaced_row = discount_template.replace(
+        let replaced_template = discount_template.replace(
           "{{ discount }}",
           res.discount
         );
-        console.log("replaced_row", replaced_row);
 
         if (res.success == "true") {
+          $("#discount-row").html(replaced_template);
+          $("#coupon-error").hide();
+
+          let final =
+            parseInt($("#total-price").text()) -
+            parseInt($("#discount-price").text());
+          $("#final-price").text(final);
+
           toastr.options = {
             positionClass: "toast-top-left",
             timeOut: 5000
           };
-          $("#discount-row").html(replaced_row);
-          $("#coupon-error").hide();
           toastr.success("Coupon has already  been applied", "Success!");
         } else {
-          console.log("falied");
+          $("#discount-row").html("");
           $("#coupon-error").show();
+          $("#final-price").text($("#total-price").text());
         }
       }
     });

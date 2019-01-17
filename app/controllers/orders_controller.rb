@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
   end
 
   def create
+    
   end
 
   def show
@@ -35,4 +36,14 @@ class OrdersController < ApplicationController
 
   def destroy
   end
+  
+  private
+  
+    def order_params
+        params.require(:order).permit(:phone,:first_name,:last_name,:post_code,:address,:comment,:delivery,:coupon)
+    end
+
+    def delivery_params 
+         params.require(:delivery).permit(:kind,:price)
+    end 
 end
