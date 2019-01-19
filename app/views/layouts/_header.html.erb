@@ -29,13 +29,20 @@
           <ul class="topbar-menu">
             <!-- <li><a href="#">info@website.com</a></li> -->
             <!-- <li><a href="#">123456789</a></li> -->
-
+            <% if current_user %>
+            <li> <a href="/users/edit">
+              <span class="hidden-xs hidden-sm hidden-md">  
+                  <i class="fa fa-user"></i>
+                 <%=current_user.email%> </span>
+            </a></li>
+            <%else%>
             <li>
               <a href="/users/edit" title="會員中心">
                 <i class="fa fa-user"></i>
                 <span class="hidden-xs hidden-sm hidden-md"> 會員中心 </span>
               </a>
             </li>
+            <%end%>
             <!-- <li><a href="https://www.leisurecosmetics.com/index.php?route=account/wishlist" id="wishlist-total" title="收藏清單（0）"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">收藏清單（0）</span></a></li> -->
             <li>
               <a href="/cart" title="購物車" id="cart">
