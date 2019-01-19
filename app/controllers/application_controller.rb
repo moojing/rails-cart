@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
      
     layout :layout_by_resource
-    helper_method :categories,:new_products
+    helper_method :categories,:post_categories
 
     def categories 
       Category.all
+    end
+    
+    def post_categories
+      PostCategory.all
     end
 
 

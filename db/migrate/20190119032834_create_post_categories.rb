@@ -5,6 +5,7 @@ class CreatePostCategories < ActiveRecord::Migration[5.2]
       t.text :image_data
       t.string :description
       t.integer :post_id
+      
 
       t.timestamps
     end

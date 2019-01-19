@@ -1,0 +1,60 @@
+<div id="page-main-content">
+	 
+		<!-- PAGE CONTENT START -->
+		<div class="section">
+
+			<!-- page heading and description -->
+			<div class="line">
+				<div class="margin">
+					<div class="fullwidth margin-bottom-60">
+						<h1 class="text-center"><%=@post_category.title%></h1>
+						<!--		  <p class="text-center">追蹤我們的最新焦點動態。</p>-->
+						<hr class="break-small break-center">
+					</div>
+				</div>
+			</div>
+
+			<div class="line">
+				<div class="margin">
+				<%@posts.each_with_index do |post,index|%>
+				 
+					<div class="fullwidth margin-m-bottom-60 ">
+						<div class="s-12 m-4 l-6 hide-s <%=((index+2)%2) == 0 ? 'right':''%> ">
+							<!-- hide in small screens -->
+							<a href="/posts/<%=post.id%>" class="image-hover-zoom">
+								
+								<%if post.image%>
+								<img src="<%=post.image_url :original%>" >
+								<%else%>
+								<img src="/default-product.png" >
+								<%end%>
+							</a>
+						</div>
+						<div class="s-12 m-8 l-6">
+							<div class="item-left">
+								<div class="fullwidth hide-l hide-m">
+									<!-- hide in large and medium screens -->
+									<a href="/posts/<%=post.id%>">
+										<%if post.image%>
+										<img src="<%=post.image_url :original%>"alt="" class="fullwidth">
+										<%else%>
+										<img src="/default-product.png" >
+										<%end%>
+									</a>
+								</div>
+								<h2 class="text-primary"><%=post.title%></h2>
+								<p class="margin-bottom-30"><%=post.description%></p>
+								<a href="/posts/<%=post.id%>" class="button">Read More</a>
+							</div>
+						</div>
+					</div>
+				<%end%>
+
+
+				</div>
+
+			</div>
+		</div>
+		<!-- PAGE CONTENT END -->
+
+	</div>

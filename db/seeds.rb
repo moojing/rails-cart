@@ -36,14 +36,15 @@ end
     newproduct = Product.create!(
         :stock => Faker::Number.number(2) ,
         :name => Faker::Creature::Cat.breed,
-        :content => Faker::Movies::StarWars.quote ,
+        :content =>Faker::Lorem.paragraph(20, false, 4) ,
         :price => Faker::Number.number(3) ,
         :sku => Faker::Bank.swift_bic ,
         :enable => 1) 
     newproduct.categories<<Category.find(Faker::Number.between(1,5))
     newpost = Post.create!(
         title: Faker::Lorem.word,
-        description: Faker::Quotes::Shakespeare.king_richard_iii_quote,
+        description: Faker::Lorem.paragraph(10, false, 4),
+        pre_description: Faker::Quotes::Shakespeare.king_richard_iii_quote,
         post_category_id: Faker::Number.between(1,3)
          )
      

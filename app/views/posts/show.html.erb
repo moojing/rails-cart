@@ -1,0 +1,48 @@
+<div id="page-main-content">
+	 
+
+    <div class="section background-white">
+        <div class="line">
+            <div class="margin">
+
+
+                <div class="s-12 m-12 l-offset-2 l-8">
+
+                    <!-- post -->
+                    <div id="blog-post">
+
+                        <!-- title & image -->
+                        <div class="line">
+                            <div class="fullwidth">
+                                <h1 class="margin-bottom-30"><%=@post.title%></h1>
+                                <%if @post.image%>
+										<img src="<%=@post.image_url :original%>"alt="" class="fullwidth margin-bottom-30">
+										<%else%>
+										<img src="/default-product.png" class="fullwidth margin-bottom-30" >
+                                    <%end%>
+                            </div>
+                        </div>
+
+                        <!-- post text -->
+                        <div class="line">
+                            <div class="fullwidth border-bottom">
+                                <div class="post">
+                                    <%=@post.description%>
+
+                                </div>
+                                <div class="text-center"><a href="javascript:history.back()" class="button">回上頁</a></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+ 
+
+</div>
+
+
+ 

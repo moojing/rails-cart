@@ -19,8 +19,8 @@ Rails.application.routes.draw do
     get '/products/:id', :to => 'products#show'
   
 
-    get '/news/categories/:id', :to => 'news_categories#show'
-    get '/news/:id', :to => 'news#show'
+    get '/posts/categories/:id', :to => 'post_categories#show'
+    get '/posts/:id', :to => 'posts#show'
   
 
     get '/account/login' , :to=>'account#login'

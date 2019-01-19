@@ -115,23 +115,20 @@
             <a href="javascript:void(0)" class="hvr-sweep-to-bottom"
               >-關於商店-</a
             >
+            
+            <% if post_categories%>
             <ul>
-              <li>
-                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
-                  最新消息
-                </a>
-              </li>
-              <li>
-                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
-                  選購攻略
-                </a>
-              </li>
-              <li>
-                <a href="/news/categories/12" class="hvr-sweep-to-bottom">
-                  常見問題
-                </a>
-              </li>
+              <%post_categories.each do |category|%>
+               
+                  <li>
+                    <a href="/posts/categories/<%=category.id%>" class="hvr-sweep-to-bottom">
+                      <%=category.title%>
+                    </a>
+                  </li>
+               
+              <%end%>
             </ul>
+            <%end%>
           </li>
 
           <li>

@@ -8,7 +8,10 @@
     <input type="text" class="form-control" name="post[title]" id="title" value="<%=@post.title%>"  >
   </div>
  
- 
+  <div class="form-group">
+        <label for="pre_description">Pre Description</label>
+        <input type="text" class="form-control" name="post[pre_description]" value="<%=@post.pre_description%>" id="pre_description"  >
+    </div>
   <div class="row">
         <div class="col-md-4">
                 <label for="post_image" class="btn btn-default">Choose Cover Image</label>
