@@ -1,0 +1,101 @@
+ 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+
+<%=form_for [:admins,@post] do |f|%>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" name="post[title]" id="title"  >
+  </div>
+ 
+ 
+  <div class="row">
+        <div class="col-md-4">
+                <label for="post_image" class="btn btn-default">Choose Cover Image</label>
+                <%=f.hidden_field :image, value: @post.cached_image_data , id:"hidden_image"%>
+                <%=f.file_field :image ,onchange:"readURL(this)" , style:"display:none;"%>
+                <div class="post-thumbnail"  >
+                <img id="img_prev" src="" alt="your img_prev" class="img-rounded" style="max-width: 500px;"  />
+                </div>
+            </div>
+  </div>
+ 
+
+
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select name="post[post_category_id]" id="category"  class="form-control" >
+      <% @categories.each do |c| %>
+      
+      <option value=<%= c.id %>> <%=c.title%></option>
+      <%end%>
+     
+    </select>
+  </div>
+
+
+  
+
+  
+ 
+  <label for="summernote">Description</label>
+  <textarea id="summernote" name="post[description]"></textarea>
+
+  <button type="submit" class="btn btn-primary">Submit</button> 
+<%end%>
+
+ 
+
+ 
+
+<% content_for :js do %>
+<script>
+
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+        $('#img_prev')
+            .attr('src', e.target.result);
+        };
+        $('#img_prev').show()
+        reader.readAsDataURL(input.files[0]);
+    }
+} 
+
+$('#image-upload-box').on("click",'.close', function(e){
+let image_id = $(this).nextAll('input[type="hidden"]')[0].value
+
+imageDelete(image_id).done((res)=>{
+if (res.message==='200'){
+  $(this).parent().parent().remove()
+}
+})
+});
+
+
+
+$(document).ready(function() {
+
+    if(!$('#img_prev').attr('src')){
+        $('#img_prev').hide()
+    }
+    $('#summernote').summernote(
+    { height: 300,
+    callbacks: {
+        onImageUpload: function(files) {
+        imageUpload(files).done((data, textStatus, jqXHR)=>{
+            let url = "/uploads/"+data.imageUrl
+            $('#summernote').summernote('insertImage', url, 'newimage');
+            })
+        }
+    }
+    });
+
+
+}); 
+
+</script>
+<% end %>

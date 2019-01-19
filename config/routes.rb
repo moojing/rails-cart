@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
    
  
+ 
+ 
   namespace :admins do
     resources 'users'
     resources 'products'
     resources 'categories'
     resources 'coupons'
+    resources 'posts'
+    resources 'post_categories'
+
   end
   root :to => 'pages#home'
 

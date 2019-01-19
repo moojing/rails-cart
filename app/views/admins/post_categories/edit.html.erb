@@ -1,0 +1,54 @@
+ 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+<%=form_for [:admins,@category] do |f|%>
+<div class="form-group">
+  <%=f.label :title , 'Category Title'  %>
+  <%=f.text_field :title , class: "form-control"%>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+      <%=f.submit 'Submit', class: 'btn btn-primary'%>
+  </div>
+  
+  <div class="col-md-3">
+      <label for="post_category_image" class="btn btn-default">Choose Category Image</label>
+      <%=f.hidden_field :image, value: @category.cached_image_data , id:"hidden_image"%>
+      <!-- <input type="file" onchange="" style="display:none;"  name="category[image]" id="image_upload"> -->
+      <%=f.file_field :image ,onchange:"readURL(this)" , style:"display:none;"%>
+      <div class="thumbnail">
+      <img id="img_prev" src="<%=@category.image_url(:small)%>" alt="your img_prev" sclass="img-rounded"   />
+    </div>
+  </div>
+</div>
+
+<%end%>
+
+<%content_for :js do%>
+  <script>
+   function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $('#img_prev')
+            .attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    } 
+  </script>
+<%end%>
+
+
+<style>
+.thumbnail{
+  height:auto;
+}
+</style>
+
+
+
+
