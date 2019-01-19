@@ -2,20 +2,26 @@
 <div class="item">
     <div class="fullwidth">
         <figure class="imghvr-reveal-down">
-            <img src="image/catalog/BS012N/BS012N/BS012N13/BS012N13-1.jpg">
+            	
+            <%if product.image[0]%>
+            <img src="<%=product.image[0].image_url :original%>" >
+            <%else%>
+            <img src="/default-product.png" >
+            <%end%>
+
             <figcaption>
                 <div class="product-hover-content">
                     <div class="btn-box">
-                        <a href="index.php?route=product%252Fproduct&amp;product_id=81" class="btn">更多細節</a>
+                        <a href="/products/<%= product.id%>" class="btn">更多細節</a>
                     </div>
                 </div>
             </figcaption>
         </figure>
     </div>
     <div class="fullwidth">
-        <h5 class="text-center">BS01 簡約生活 - 基礎化妝刷具套裝</h5>
+        <h5 class="text-center"><%=product.name%></h5>
         <p class="list_price">
-            <span class="text-primary">1090.0000</span> <span class="strike">TWD$1,390</span>
+            <span class="text-primary">TWD$<%=product.price.to_i-product.discount_value.to_i%></span> <span class="strike">TWD$<%=product.price%></span>
         </p>
         <!-- <p class="text-center"><span class="text-dark-light">Starting from</span> - <span class="text-primary">$299</span></p> -->
     </div>

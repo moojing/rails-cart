@@ -104,7 +104,9 @@ console.log('cartList',cartList)
      $('.cart-item')[productIndex].remove()
     cartList.remove(productIndex)
     setCookie('cartList',cartList)
+    if(productIndex==0) location.reload()
     countPrice()
+    
     
   })
 

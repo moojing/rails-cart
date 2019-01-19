@@ -1,0 +1,16 @@
+<div class="s-12 m-12 l-4 margin-m-bottom-60">
+        <div class="fullwidth margin-bottom">
+            <a href="/posts/<%=post.id%>" class="image-hover-zoom">
+                
+                <%if post.image%>
+                <img src="<%=post.image_url :original%>" alt="<%=post.title%>">
+                <%else%>
+                <img src="/default-product.png" >
+                <%end%>
+            </a>
+        </div>
+        <div class="fullwidth">
+            <h3><a href="/posts/<%=post.id%>"><%=post.title%></a></h3>
+            <p><%=post.created_at%></p>
+        </div>
+</div>

@@ -34,8 +34,8 @@
 				<!-- slideshow start -->
 				
 				<div class="carousel-blocks">
-					<% 5.times do%>
-					 	<%= render "item" %>
+					<% @new_products.each do |product| %>
+					 	<%= render "item" , product:product%>
 					<% end %>
 				</div>
 				
@@ -97,19 +97,19 @@
 		<div class="section newsarea">
 			<div class="line">
 				<!-- heading -->
-				<h2 class="text-center"> 時尚報告</h2>
+				<h2 class="text-center">最新消息</h2>
 				<hr class="break-small break-center">
 
 				<!-- products slideshow start -->
 				<div class="line">
 					<div class="margin">
-						<%5.times do%>
-							<%=render 'news'%>
+						<% @posts.each do |post|%>
+							<%=render 'posts' ,post:post%>
 						<%end%>
 					</div>
 				</div>
 				<div class="carousel-content text-center margin-top-30">
-					<a href="index.php?route=newsblog%252Fcategory&amp;category_id=5" class="slideshow-btn2">更多消息</a>
+					
 				</div>
 				<!-- products slideshow end -->
 
