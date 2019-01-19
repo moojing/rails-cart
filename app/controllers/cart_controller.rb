@@ -2,7 +2,8 @@ class CartController < ApplicationController
     def show 
         require 'json'
         @total = 0
-        if cookies[:cartList]
+        session.delete(:cartList)
+        if cookies[:cartList] && cookies[:cartList].length>0
             @cartList=JSON.parse cookies[:cartList]
             @cartList.each do |cart|
                 product = Product.find(cart['product_id'])
@@ -12,7 +13,7 @@ class CartController < ApplicationController
                 cart['price'] = product.price.to_i - product.discount_value.to_i
                 @total +=  cart['price'] * cart['num'].to_i
             end
-            
+            session[:cartList]=@cartList
         else
         
         @cartList =  []

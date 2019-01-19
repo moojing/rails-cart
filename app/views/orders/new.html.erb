@@ -6,6 +6,7 @@
       method="post"
       action="/orders"
       class="customform payform"
+      onsubmit=" event.preventDefault(); order_validate(this);"
     >
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <div id="content" class="line">
@@ -26,6 +27,7 @@
                     placeholder="姓氏"
                     id="input-payment-lastname"
                   />
+                  <span class="error-last-name"></span>
                 </div>
                 <div class="s-12 m-6 l-6">
                   <input
@@ -35,6 +37,7 @@
                     placeholder="名字"
                     id="input-payment-firstname"
                   />
+                  <span class="error-first-name"></span>
                 </div>
               </div>
               <div class="fullwidth">
@@ -45,6 +48,7 @@
                   placeholder="電話"
                   id="input-telephone"
                 />
+                <span class="error-phone"></span>
               </div>
               <div class="fullwidth">
                 <input
@@ -54,16 +58,17 @@
                   placeholder="E-Mail（帳號）"
                   id="input-email"
                 />
+                <span class="error-email"></span>
               </div>
 
               <div class="city-selector-set">
                 <div class="s-12 m-12 l-4">
                   <!-- 縣市選單 -->
-                  <select class="county" name="order[zone]"></select>
+                  <select class="county" name="order[zone]" style="height: 54px;"></select>
                 </div>
                 <div class="s-12 m-6 l-4">
                   <!-- 區域選單 -->
-                  <select class="district" name="order[city]"></select>
+                  <select class="district" name="order[city]" style="height: 54px;"></select>
                 </div>
                 <div class="s-12 m-6 l-4">
                   <!-- 郵遞區號欄位 (建議加入 readonly 屬性，防止修改) -->
@@ -77,6 +82,7 @@
                     name="order[post_code]"
                   />
                 </div>
+                <span class="error-zone"></span>
               </div>
 
               <!-- address Combo -->
@@ -361,3 +367,10 @@
   });
 </script>
 <%end%>
+<style>
+[class^='error']{
+  color:#c66185; 
+  display: block;
+  margin-top: -10px;
+}
+</style>

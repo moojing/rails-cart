@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get '/cart' , :to=> 'cart#show'
      
     get '/orders/new'
+    get '/orders/success'
     post '/orders' ,:to=> 'orders#create'
     post '/coupons/check', :to => 'coupons#check'
 
