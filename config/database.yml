@@ -50,5 +50,7 @@ test:
 production:
   <<: *default
   database: leisure_production
-  username: leisure
-  password: <%= ENV['LEISURE_DATABASE_PASSWORD'] %>
+  username: root
+  password: toor
+  socket: /var/run/mysqld/mysqld.sock
+  secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
