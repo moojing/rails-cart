@@ -38,21 +38,21 @@
                                 </div>
                                 
                                 <div class="s-12 m-6 l-6">
-                                    <input type="text" name="user[first_name]" value="" placeholder="名字"  />
+                                    <input type="text" name="user[first_name]" value="<%=resource['first_name']%>" placeholder="名字"  />
                                 </div>
                             </div>
                             <div class="fullwidth">
-                                <input type="tel" name="user[telephone]" value="" placeholder="聯絡電話" />
+                                <input type="tel" name="user[telephone]" value="<%=resource['telephone']%>" placeholder="聯絡電話" />
                             </div>
                             <div class="fullwidth">
-                                <input type="email" name="user[email]" value="" class="<%= @user.errors.messages[:email].length>0 ? 'error-input' : '' %>" placeholder="Email 信箱（帳號）"   />
+                                <input type="email" name="user[email]" value="<%=resource['email']%>" class="<%= @user.errors.messages[:email].length>0 ? 'error-input' : '' %>" placeholder="Email 信箱（帳號）"   />
                                 <% if @user.errors.messages[:email].length>0 %>
                                 <span class="error_message"><%= @user.errors.messages[:email][0]%></span>
                                 <%end%>
                             </div>
                                   
                             <div class="fullwidth">
-                                <input type="text" name="user[address]" value="" placeholder="地址" />
+                                <input type="text" name="user[address]" value="<%=resource['address']%>" placeholder="地址" />
                             </div>
 
 
