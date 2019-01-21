@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+    before_action :check_cart ,only: [:new]
   def new
         require 'json'
         @total = 0
@@ -86,7 +87,11 @@ class OrdersController < ApplicationController
   end
   
   private
-  
+    def check_cart 
+        if session[:cartList].empty?
+            redirect_back(fallback_location: '/cart')
+        end
+    end 
     def order_params
         params.require(:order).permit(:phone,:zone,:city,:first_name,:last_name,:post_code,:address,:comment,:coupon,:email)
     end
