@@ -33,7 +33,7 @@
             <li> <a href="/users/edit">
               <span class="hidden-xs hidden-sm hidden-md">  
                   <i class="fa fa-user"></i>
-                 <%=current_user.email%> </span>
+                 <%= "Hi, #{current_user.email.split('@')[0].capitalize} " %> </span>
             </a></li>
             <%else%>
             <li>
