@@ -14,7 +14,14 @@
 				<div class="margin">
 					<div class="s-12 m-offset-3 m-6 l-offset-4 l-4">
 						<div class="fullwidth">
-							
+
+				<ul class="error__login" style="padding:0">
+						<% flash.each do |type, message| %>
+							  <li class="user_error_field"> <%= message %></li>    
+						<% end %> 
+				 
+				</ul> 		
+
                 <%= form_for(resource, as: resource_name, url: session_path(resource_name),  html: {class: "customform"}) do |f| %>
                 <div class="margin-bottom-30">
  
@@ -46,3 +53,12 @@
 			</div>
 		</div>
 	</div>
+
+	<style>
+	ul.error__login {
+		border:#fe799d; 
+		color:#fe799d; 
+		padding:0; 
+		margin-bottom: 20px;
+	}
+	</style>
