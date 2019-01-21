@@ -61,40 +61,42 @@
                 <span class="error-email"></span>
               </div>
 
-              <div class="city-selector-set">
-                <div class="s-12 m-12 l-4">
-                  <!-- 縣市選單 -->
-                  <select class="county" name="order[zone]" style="height: 54px;"></select>
-                </div>
-                <div class="s-12 m-6 l-4">
-                  <!-- 區域選單 -->
-                  <select class="district" name="order[city]" style="height: 54px;"></select>
-                </div>
-                <div class="s-12 m-6 l-4">
-                  <!-- 郵遞區號欄位 (建議加入 readonly 屬性，防止修改) -->
-                  <input
-                    style="line-height: 24px;"
-                    class="zipcode"
-                    type="text"
-                    size="3"
-                    readonly
-                    placeholder="郵遞區號"
-                    name="order[post_code]"
-                  />
-                </div>
-                <span class="error-zone"></span>
-              </div>
-
-              <!-- address Combo -->
-
-              <div class="fullwidth">
-                <input
-                  type="text"
-                  name="order[address]"
-                  value=""
-                  placeholder="地址"
-                  id="input-payment-address-1"
-                />
+              <div class="delivery_address">
+                  <div class="city-selector-set">
+                      <div class="s-12 m-12 l-4">
+                        <!-- 縣市選單 -->
+                        <select class="county" name="order[zone]" style="height: 54px;"></select>
+                      </div>
+                      <div class="s-12 m-6 l-4">
+                        <!-- 區域選單 -->
+                        <select class="district" name="order[city]" style="height: 54px;"></select>
+                      </div>
+                      <div class="s-12 m-6 l-4">
+                        <!-- 郵遞區號欄位 (建議加入 readonly 屬性，防止修改) -->
+                        <input
+                          style="line-height: 24px;"
+                          class="zipcode"
+                          type="text"
+                          size="3"
+                          readonly
+                          placeholder="郵遞區號"
+                          name="order[post_code]"
+                        />
+                      </div>
+                      <span class="error-zone"></span>
+                    </div>
+      
+                    <!-- address Combo -->
+      
+                    <div class="fullwidth">
+                      <input
+                        type="text"
+                        name="order[address]"
+                        value=""
+                        placeholder="地址"
+                        id="input-payment-address-1"
+                      />
+                    </div>
               </div>
               <div class="fullwidth">
                 <textarea
@@ -117,59 +119,31 @@
                 <input type="hidden" name="delivery[price]" value="" />
 
                 <div class="s-12 m-6 l-6">
+                    <div class="radio">
+                        <label>
+                          <input
+                            type="radio"
+                            name="delivery[kind]"
+                            value="flat"
+                            checked
+                            delivery-price="60"
+                          />
+                          郵寄/宅配
+                        </label>
+                      </div>
                   <div class="radio">
                     <label>
                       <input
                         type="radio"
                         name="delivery[kind]"
-                        value="ecpaylogistic"
-                        delivery-price="100"
-                      />超商取貨付款
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input
-                        type="radio"
-                        name="delivery[kind]"
-                        value="flat"
-                        checked
-                        delivery-price="60"
-                      />
-                      郵寄/宅配
+                        value="face_to_face"
+                        delivery-price="0"
+                      />面交
                     </label>
                   </div>
                 </div>
 
-                <div class="ecpaylogistic-control-area s-12 m-12 l-12">
-                  <div id="ecpaylogistic-store-info" style="display:none;">
-                    <div class="customform store-info">
-                      <h4>收件門市</h4>
-
-                      <div class=" form-group">
-                        <div class="error"></div>
-                        <div class="col-sm-2">門市地址：</div>
-                        <div class="col-sm-10 ">
-                          <input
-                            type="text"
-                            name="ecpaylogistic_address"
-                            value=""
-                          />
-                        </div>
-                      </div>
-                      <div class=" form-group">
-                        <div class="col-sm-2">門市電話：</div>
-                        <div class="col-sm-10">
-                          <input
-                            type="text"
-                            name="ecpaylogistic_telephone"
-                            value=""
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                 
               </div>
             </div>
           </div>
@@ -190,7 +164,7 @@
                     id="input-coupon"
                   />
                   <span id="coupon-error" style="   color: red;display : none;"
-                    >Coupon is not exists!!</span
+                    >Coupon does not exists!!</span
                   >
                 </div>
                 <div class="s-12 m-6 l-5">
@@ -296,13 +270,19 @@
       "{{ delivery }}",
       deliveryPrice
     );
+   
     $("#delivery-row").html(replaced_template);
+    let final =
+            parseInt($("#total-price").text()) +
+            parseInt($("#delivery-price").text());
+          $("#final-price").text(final);
   }
 
   setUpDelivery();
-
+  
   $('input[name="delivery[kind]"]').on("change", function(e) {
     setUpDelivery();
+    
   });
 </script>
 <script>
@@ -355,14 +335,13 @@
 </script>
 
 <script type="text/javascript">
-  let delivery = $("[name='order[delivery]']");
-  let store = $("#ecpaylogistic-store-info");
-
+  let delivery = $("[name='delivery[kind]']");
+  
   delivery.on("change", function() {
-    if ($(this).val() == "ecpaylogistic") {
-      store.show();
-    } else {
-      store.hide();
+    if ($(this).val()=='face_to_face'){
+      $('.delivery_address').hide()
+    }else{
+      $('.delivery_address').show()
     }
   });
 </script>
