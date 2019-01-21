@@ -22,11 +22,7 @@ Rails.application.routes.draw do
     get '/posts/categories/:id', :to => 'post_categories#show'
     get '/posts/:id', :to => 'posts#show'
   
-
-    get '/account/login' , :to=>'account#login'
-    get '/account/edit' , :to=>'account#edit'
-    get '/account/password' , :to=>'account#password'
-    get '/account/address' , :to=>'account#address'
+ 
   
     get '/cart' , :to=> 'cart#show'
      

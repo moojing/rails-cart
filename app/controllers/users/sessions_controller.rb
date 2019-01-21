@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  before_action :authenticate_user!
+  prepend_before_action :email_is_empty?, only: [:create]
   # GET /resource/sign_in
   # def new
   #   super
@@ -24,4 +24,16 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+ 
+  
+  def email_is_empty?
+  
+    if params[:user][:email].empty?
+    
+      set_flash_message(:alert,:email_empty)
+
+      return redirect_to params[:redirect]
+    end  
+    
+  end
 end

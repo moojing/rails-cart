@@ -17,6 +17,7 @@
 
 				<ul class="error__login" style="padding:0">
 						<% flash.each do |type, message| %>
+							 
 							  <li class="user_error_field"> <%= message %></li>    
 						<% end %> 
 				 
@@ -38,7 +39,7 @@
 
 							 
 								</div>
-								<input type="hidden" name="redirect" value="https://www.leisurecosmetics.com/index.php?route=account/edit" />
+								<input type="hidden" name="redirect" value="/users/sign_in" />
                 <% end %>
 
                 <%= render "users/shared/links" %>
