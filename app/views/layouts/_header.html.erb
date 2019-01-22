@@ -80,18 +80,30 @@
                     </li>
                     <li>
                         <a href='/products/categories/12' class="hvr-sweep-to-bottom">-限時優惠-</a>
-                    </li>
+                    </li>-->
 
-                    <li>
-                        <a href='/products/categories/12' class="hvr-sweep-to-bottom">-熱賣推薦-</a>
-                    </li> -->
+          
+          <li>
+            <a href="/products/categories/<%=categories[0].slug%>" class="hvr-sweep-to-bottom">
+              -<%=categories[0].slug%>- </a>
+          <li>
+          
+          <li>
+            <a href="/products/categories/<%=categories[1].slug%>" class="hvr-sweep-to-bottom">
+              -<%=categories[1].slug%>- </a>
+          <li>
+
+          <li>
+              <a href="/products/categories/<%=categories[2].slug%>" class="hvr-sweep-to-bottom">
+              -<%=categories[2].slug%>- </a>
+          <li>
 
           <li>
             <a href="javascript:void(0)" class="hvr-sweep-to-bottom"
               >-商品分類-</a
             >
             <ul>
-              <%categories.each do |category|%>
+              <%categories.each_with_index do |category,index|%>
               <li>
                 <a
                   href="/products/categories/<%=category.slug%>"
@@ -99,7 +111,7 @@
                 >
                   <%=category.name%>
                 </a>
-                <%if category.has_child?%>
+                <%if category.has_child? && index>=3%>
                 <ul>
                   <%if category.children%> <% category.children.each do
                   |child|%>

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   
     resources :product
 
-    get '/posts/categories/:slug', :to => 'post_categories#show'
+  get '/posts/categories/:slug', :to => 'post_categories#show'
     get '/posts/:slug', :to => 'posts#show'
   
  

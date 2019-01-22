@@ -14,8 +14,8 @@ Coupon.create!(code: 'yes888',expire_at: '2020-01-16 16:43:42 UTC',discount:'200
     User.create!(email: Faker::Internet.unique.email,password:'123456',password_confirmation:'123456')
 end
 
-category = ['化妝品','美髮用品','保養品','日用品','獨家產品'] 
-5.times do |i| 
+category = ['新品上架','限時優惠','熱賣推薦','化妝品','美髮用品','保養品','日用品','獨家產品'] 
+8.times do |i| 
     Category.create!(
         :name=>category[i],
         :slug=>category[i],
@@ -33,7 +33,7 @@ post_category.each_with_index do |title,index|
 end 
 
 
-10.times do |i|
+20.times do |i|
     newproduct = Product.create!(
         :stock => Faker::Number.number(2) ,
         :name => Faker::Creature::Cat.breed,
