@@ -122,9 +122,9 @@ $(document).ready(function() {
       }
     });
     let  product_id  = $('#editform')[0].action.split('/').pop()
-    console.log('product_id',product_id)
+    
     imageGet(product_id).done((res)=>{
-       console.log('res',res)
+     
        res.images.forEach(image=>{
 
           let url = "/uploads/"+image.imageUrl
