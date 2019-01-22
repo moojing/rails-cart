@@ -15,12 +15,14 @@ Rails.application.routes.draw do
   root :to => 'pages#home'
 
   
-    get '/products/categories/:id', :to => 'products_categories#show'
-    get '/products/:id', :to => 'products#show'
+    get '/products/categories/:slug', :to => 'products_categories#show'
+    
+    get '/products/:slug', :to => 'products#show'
   
+    resources :product
 
-    get '/posts/categories/:id', :to => 'post_categories#show'
-    get '/posts/:id', :to => 'posts#show'
+    get '/posts/categories/:slug', :to => 'post_categories#show'
+    get '/posts/:slug', :to => 'posts#show'
   
  
   

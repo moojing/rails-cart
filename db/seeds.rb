@@ -18,6 +18,7 @@ category = ['化妝品','美髮用品','保養品','日用品','獨家產品']
 5.times do |i| 
     Category.create!(
         :name=>category[i],
+        :slug=>category[i],
         :kind=>0
     )
 end 

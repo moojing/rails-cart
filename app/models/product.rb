@@ -2,6 +2,10 @@
 class Product < ApplicationRecord
     validates_presence_of :name
     paginates_per 15
+    extend ::FriendlyId
+
+    friendly_id :name, use: [:finders, :slugged]
+
     # if :image
     #     include ImageUploader::Attachment.new(:image)     
     # end
