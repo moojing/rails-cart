@@ -6,7 +6,9 @@ class CartController < ApplicationController
         if cookies[:cartList] && cookies[:cartList].length>0
             @cartList=JSON.parse cookies[:cartList]
             @cartList.each do |cart|
-                product = Product.find(cart['product_id'])
+                
+                product = Product.find( CGI.unescape(cart['product_id']))
+               
                 cart['id'] = product.id
                 cart['name'] = product.name
                 cart['image'] = product.image
