@@ -34,14 +34,14 @@ end
 
 
 20.times do |i|
-    newproduct = Product.create!(
-        :stock => Faker::Number.number(2) ,
-        :name => Faker::Creature::Cat.breed,
-        :content =>Faker::Lorem.paragraph(20, false, 4) ,
-        :price => Faker::Number.number(3) ,
-        :sku => Faker::Bank.swift_bic ,
-        :enable => 1) 
-    newproduct.categories<<Category.find(Faker::Number.between(1,5))
+    # newproduct = Product.create!(
+    #     :stock => Faker::Number.number(2) ,
+    #     :name => Faker::Creature::Cat.breed,
+    #     :content =>Faker::Lorem.paragraph(20, false, 4) ,
+    #     :price => Faker::Number.number(3) ,
+    #     :sku => Faker::Bank.swift_bic ,
+    #     :enable => 1) 
+    # newproduct.categories<<Category.find(Faker::Number.between(1,5))
     newpost = Post.create!(
         title: Faker::Lorem.word,
         description: Faker::Lorem.paragraph(10, false, 4),
