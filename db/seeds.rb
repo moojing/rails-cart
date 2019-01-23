@@ -28,6 +28,7 @@ post_category = ['最新消息','選購攻略','常見問題']
 post_category.each_with_index do |title,index| 
     PostCategory.create!(
         :title=>title,
+        :slug => title,
         :description=>Faker::Lorem.sentence(3, false, 4) 
     )
 end 
@@ -42,12 +43,12 @@ end
     #     :sku => Faker::Bank.swift_bic ,
     #     :enable => 1) 
     # newproduct.categories<<Category.find(Faker::Number.between(1,5))
-    newpost = Post.create!(
-        title: Faker::Lorem.word,
-        description: Faker::Lorem.paragraph(10, false, 4),
-        pre_description: Faker::Quotes::Shakespeare.king_richard_iii_quote,
-        post_category_id: Faker::Number.between(1,3)
-         )
+    # newpost = Post.create!(
+    #     title: Faker::Lorem.word,
+    #     description: Faker::Lorem.paragraph(10, false, 4),
+    #     pre_description: Faker::Quotes::Shakespeare.king_richard_iii_quote,
+    #     post_category_id: Faker::Number.between(1,3)
+    #      )
      
 end
 

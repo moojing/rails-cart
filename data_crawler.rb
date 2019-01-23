@@ -17,6 +17,10 @@ ActiveRecord::Base.establish_connection({
 class User < ActiveRecord::Base 
 end
 
+class Post < ActiveRecord::Base 
+end
+
+
 class Product < ActiveRecord::Base 
 end
 
@@ -31,8 +35,7 @@ class RubyCrawler
         binding.pry
         puts 'prud'
     end
-    def run  
-        
+    def run_products
         (1..100).each do |product_id|
             puts "Parsing product id : #{product_id} \n"
             product_url = "#{BASE_URL}?route=product/product&product_id=#{product_id}"
@@ -40,7 +43,7 @@ class RubyCrawler
              
                 html = RestClient.get(product_url)
                 doc = Nokogiri::HTML(html)
-                product_data = parse_page(doc)
+                product_data = parse_product(doc)
                 # print   "name:#{product_data[:name]}"
                 # print  "price:#{product_data[:price]}"
                 # print  "content:#{product_data[:content]}"
@@ -57,7 +60,7 @@ class RubyCrawler
         end
     end
 
-    def parse_page(doc)
+    def parse_product(doc)
         product_name = doc.css('h2.text-primary').first.text()
         .gsub("\n","")
         .gsub("\t","")
@@ -82,6 +85,36 @@ class RubyCrawler
             :stock=> 100 , 
         }
     end 
-end 
 
-RubyCrawler.new.run
+    def run_posts
+        (1..20).each do |posts_id|
+        puts "Parsing posts id : #{posts_id} \n"
+            posts_url = "#{BASE_URL}?route=newsblog/article&article_id=#{posts_id}"
+            begin
+             
+                html = RestClient.get(posts_url)
+                doc = Nokogiri::HTML(html)
+                posts_data = parse_posts(doc)
+                Post.create!(posts_data)
+            rescue => exception
+                puts "#{exception.message}"
+            end
+        end
+    end 
+    
+    def parse_posts(doc)
+        posts_title = doc.css('h1.margin-bottom-30').text
+        post_category_id =  Faker::Number.between(1,3)
+        post_description = doc.css('.post')
+
+        return {
+            :title => posts_title,
+            :slug => posts_title, 
+            :description => post_description, 
+            :post_category_id => post_category_id,
+        }
+    end 
+
+end 
+RubyCrawler.new.run_products
+RubyCrawler.new.run_posts
