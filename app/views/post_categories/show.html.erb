@@ -34,7 +34,7 @@
 							<div class="item-left">
 								<div class="fullwidth hide-l hide-m">
 									<!-- hide in large and medium screens -->
-									<a href="/posts/<%=post.id%>">
+									<a href="/posts/<%=post.slug%>">
 										<%if post.image%>
 										<img src="<%=post.image_url :original%>"alt="" class="fullwidth">
 										<%else%>
@@ -44,7 +44,7 @@
 								</div>
 								<h2 class="text-primary"><%=post.title%></h2>
 								<p class="margin-bottom-30"><%=post.pre_description%></p>
-								<a href="/posts/<%=post.id%>" class="button">Read More</a>
+								<a href="/posts/<%=post.slug%>" class="button">Read More</a>
 							</div>
 						</div>
 					</div>
