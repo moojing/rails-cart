@@ -88,7 +88,7 @@ class OrdersController < ApplicationController
   
   private
     def check_cart 
-        if session[:cartList].empty?
+        if session[:cartList].nil?
             redirect_back(fallback_location: '/cart')
         end
     end 
