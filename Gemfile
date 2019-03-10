@@ -58,8 +58,14 @@ group :test do
 end
 gem 'devise'
  
-gem 'pg' , '~> 1.1.4'
-gem 'mysql2'  
+group :production do
+  gem 'pg'
+end
+
+group :development, :test do
+  gem 'mysql2'  
+end  
+
 
 gem 'toastr-rails'
 gem 'summernote-rails', '~> 0.8.10.0'
