@@ -77,7 +77,6 @@ gem 'friendly_id', '~> 5.2'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #for ruby-crawler
-gem 'open-uri'
 gem 'nokogiri'
 gem 'rest-client'
 gem 'faker'# :git => 'https://github.com/stympy/faker.git', :branch => 'master'
