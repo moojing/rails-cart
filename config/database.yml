@@ -10,12 +10,12 @@
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: toor
-  socket: /tmp/mysql.sock
+  #socket: /tmp/mysql.sock
 
 development:
   <<: *default
@@ -52,5 +52,5 @@ production:
   database: leisure_production
   username: root
   password: toor
-  socket: /var/run/mysqld/mysqld.sock
+  #socket: /var/run/mysqld/mysqld.sock
   secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>

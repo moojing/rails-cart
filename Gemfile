@@ -58,14 +58,8 @@ group :test do
 end
 gem 'devise'
  
-group :production do
-  gem 'pg'
-end
-
-group :development, :test do
-  gem 'mysql2'  
-end  
-
+#gem 'pg' , '~> 1.1.4'
+gem 'mysql2'  
 
 gem 'toastr-rails'
 gem 'summernote-rails', '~> 0.8.10.0'
@@ -75,6 +69,6 @@ gem 'kaminari'
 gem 'friendly_id', '~> 5.2'
 gem 'nokogiri'
 gem 'rest-client'
-gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'faker'# :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
