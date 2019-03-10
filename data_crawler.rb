@@ -4,9 +4,10 @@ require('rest-client')
 require('open-uri')
 require('active_record')
 require('faker') 
+require('pg')
 
 ActiveRecord::Base.establish_connection({
-    adapter: 'mysql2',
+    adapter: 'postgresql',
     encoding: 'utf8',
     database: 'leisure_development',
     username: 'root',
