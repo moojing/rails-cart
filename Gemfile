@@ -62,9 +62,9 @@ group :production do
   gem 'pg'
 end
 
-
-
-
+group :development, :test do
+  gem 'mysql2'  
+end  
 
 
 gem 'toastr-rails'
@@ -77,7 +77,6 @@ gem 'friendly_id', '~> 5.2'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #for ruby-crawler
-  gem 'mysql2'  
 gem 'nokogiri'
 gem 'rest-client'
 gem 'faker'# :git => 'https://github.com/stympy/faker.git', :branch => 'master'
