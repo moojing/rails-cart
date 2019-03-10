@@ -32,7 +32,7 @@ class RubyCrawler
     BASE_URL = 'https://www.leisurecosmetics.com/index.php'
 
     def test_db
-        binding.pry
+         
         puts 'prud'
     end
     def run_products

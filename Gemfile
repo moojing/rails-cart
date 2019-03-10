@@ -73,8 +73,13 @@ gem "shrine", "~> 2.0"
 gem 'image_processing', '~> 1.0'
 gem 'kaminari'
 gem 'friendly_id', '~> 5.2'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+#for ruby-crawler
+gem 'open-uri'
 gem 'nokogiri'
 gem 'rest-client'
 gem 'faker'# :git => 'https://github.com/stympy/faker.git', :branch => 'master'
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
